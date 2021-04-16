@@ -11,7 +11,7 @@ export default function License({ open, onClose }: LicenseProps): ReactElement {
     return <></>;
   }
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal withBackdrop open={open} onClose={onClose}>
       <div>
         Secret Hitler is a game developed by Goat, Wolf, & Cabbage, licensed
         under the{" "}
