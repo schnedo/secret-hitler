@@ -35,5 +35,5 @@ jobs:
           touch docs/.nojekyll
           npm run export --if-present
           git add -f docs
-          git commit -m "publish"
+          if [ $(git diff --cached | wc -m) -gt "0" ]; then git commit -m "publish"; fi
           git push
