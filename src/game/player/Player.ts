@@ -1,19 +1,6 @@
 import { Role } from "../roles";
 
-export class Player {
+export interface Player {
   readonly name: string;
-  #role: Role | null;
-
-  constructor(name: string) {
-    this.name = name;
-    this.#role = null;
-  }
-
-  set role(role: Role) {
-    this.#role = role;
-  }
-
-  toString() {
-    return `${this.name}: ${this.#role?.constructor}`;
-  }
+  role: Role | null;
 }

@@ -6,5 +6,9 @@ export interface AvatarProps {
 }
 
 export default function Avatar({ player }: AvatarProps): ReactElement {
-  return <div>{player.toString()}</div>;
+  return (
+    <div>
+      {player.name}: {player.role}
+    </div>
+  );
 }
