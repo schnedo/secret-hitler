@@ -56,4 +56,19 @@ describe("Modal", () => {
     userEvent.click(getByTestId("id"));
     expect(onClose).not.toHaveBeenCalled();
   });
+
+  it("should have backdrop filter when set", async () => {
+    expect.hasAssertions();
+    const { container } = render(<Modal withBackdrop open={true} />);
+    expect(container.firstChild).toHaveStyleRule(
+      "backdrop-filter",
+      "brightness(40%)",
+    );
+  });
+
+  it("should not have backdrop filter when not set", async () => {
+    expect.hasAssertions();
+    const { container } = render(<Modal open={true} />);
+    expect(container.firstChild).toHaveStyleRule("backdrop-filter", undefined);
+  });
 });

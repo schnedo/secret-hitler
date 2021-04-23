@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEventHandler } from "react";
+import { MouseEventHandler, ReactElement, ReactNode } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 const Global = createGlobalStyle`
@@ -7,23 +7,33 @@ const Global = createGlobalStyle`
   }
 `;
 
-const Container = styled.div`
+interface ContainerProps {
+  withBackdrop?: boolean;
+}
+
+const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   min-width: 100vw;
-  backdrop-filter: brightness(40%);
   position: fixed;
   top: 0;
+  backdrop-filter: ${({ withBackdrop }) => withBackdrop && "brightness(40%)"};
 `;
 
-export interface ModalProps {
+export interface ModalProps extends ContainerProps {
   open: boolean;
   onClose?: () => void;
+  children?: ReactNode;
 }
 
-const Modal: FunctionComponent<ModalProps> = ({ open, onClose, children }) => {
+function Modal({
+  open,
+  onClose,
+  children,
+  withBackdrop,
+}: ModalProps): ReactElement {
   const closeContainer: MouseEventHandler = (event) => {
     if (onClose && event.target === event.currentTarget) {
       onClose();
@@ -34,11 +44,11 @@ const Modal: FunctionComponent<ModalProps> = ({ open, onClose, children }) => {
     return <></>;
   }
   return (
-    <Container onClick={closeContainer}>
+    <Container withBackdrop={withBackdrop} onClick={closeContainer}>
       <Global />
       <dialog open={open}>{children}</dialog>
     </Container>
   );
-};
+}
 
 export default Modal;
