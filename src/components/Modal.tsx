@@ -1,4 +1,4 @@
-import { FunctionComponent, MouseEventHandler } from "react";
+import { MouseEventHandler, ReactElement, ReactNode } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 const Global = createGlobalStyle`
@@ -25,14 +25,15 @@ const Container = styled.div<ContainerProps>`
 export interface ModalProps extends ContainerProps {
   open: boolean;
   onClose?: () => void;
+  children?: ReactNode;
 }
 
-const Modal: FunctionComponent<ModalProps> = ({
+function Modal({
   open,
   onClose,
   children,
   withBackdrop,
-}) => {
+}: ModalProps): ReactElement {
   const closeContainer: MouseEventHandler = (event) => {
     if (onClose && event.target === event.currentTarget) {
       onClose();
@@ -48,6 +49,6 @@ const Modal: FunctionComponent<ModalProps> = ({
       <dialog open={open}>{children}</dialog>
     </Container>
   );
-};
+}
 
 export default Modal;

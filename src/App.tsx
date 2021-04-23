@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import Button from "./components/Button";
 import Footer from "./Footer";
 import { Game } from "./game/Game";
@@ -13,7 +13,7 @@ const players: Player[] = [
   new Player("Mohammed"),
 ];
 
-const App: FunctionComponent = () => {
+export default function App(): ReactElement {
   const [game, setGame] = useState<Game | null>(null);
 
   if (game == null) {
@@ -35,6 +35,4 @@ const App: FunctionComponent = () => {
       </>
     );
   }
-};
-
-export default App;
+}

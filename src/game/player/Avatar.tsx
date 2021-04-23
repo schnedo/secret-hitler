@@ -1,12 +1,10 @@
-import { FunctionComponent } from "react";
+import { ReactElement } from "react";
 import { Player } from "./Player";
 
 export interface AvatarProps {
   player: Player;
 }
 
-const Avatar: FunctionComponent<AvatarProps> = ({ player }) => {
+export default function Avatar({ player }: AvatarProps): ReactElement {
   return <div>{player.toString()}</div>;
-};
-
-export default Avatar;
+}
