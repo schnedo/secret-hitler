@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import Button from "./components/Button";
 import License from "./License";
 
 export default function Footer(): ReactElement {
@@ -6,7 +7,7 @@ export default function Footer(): ReactElement {
 
   return (
     <footer>
-      <button onClick={() => setOpen((old) => !old)}>License</button>
+      <Button onClick={() => setOpen(true)}>License</Button>
       <License open={isOpen} onClose={() => setOpen(false)} />
     </footer>
   );
