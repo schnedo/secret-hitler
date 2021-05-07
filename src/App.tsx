@@ -1,10 +1,8 @@
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "./components/Button";
+import { Button } from "./components";
 import Footer from "./Footer";
-import { assignRoles } from "./game/gameSlice";
-import Avatar from "./game/player/Avatar";
-import { Player } from "./game/player/Player";
+import { assignRoles, Player, Avatar } from "./game";
 
 export default function App(): ReactElement {
   const players = useSelector(

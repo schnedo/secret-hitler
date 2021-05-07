@@ -1,6 +1,6 @@
-import { Role } from "../roles";
+import Role from "./Role";
 
-export interface Player {
+export default interface Player {
   readonly name: string;
   role: Role | null;
 }
