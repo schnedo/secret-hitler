@@ -1,22 +1,15 @@
+import { RolesBag } from "./createRolesBagCreator";
 import { GameState } from "./initialState";
-import { Role } from "./player";
 
-export interface RolesShuffler {
-  (array: Role[]): Role[];
+export interface RolesBagCreator {
+  (nPlayers: number): RolesBag;
 }
 
 export default function createRoleAssigner(
-  shuffle: RolesShuffler,
+  createRolesBag: RolesBagCreator,
 ): (gameState: GameState) => GameState {
   return (state) => {
-    const rolesBag: Role[] = [
-      "hitler",
-      "fascist",
-      "liberal",
-      "liberal",
-      "liberal",
-    ];
-    const shuffledBag = shuffle(rolesBag);
+    const shuffledBag = createRolesBag(state.players.length);
     for (const player of state.players) {
       const maybeRole = shuffledBag.pop();
       if (maybeRole === undefined) {

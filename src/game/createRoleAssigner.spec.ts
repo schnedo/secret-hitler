@@ -1,6 +1,7 @@
-import createRoleAssigner, { RolesShuffler } from "./createRoleAssigner";
+import createRoleAssigner, { RolesBagCreator } from "./createRoleAssigner";
+import { getUnshuffledRolesBag, RolesBag } from "./createRolesBagCreator";
 import getInitialState, { GameState } from "./initialState";
-import { Player, Role } from "./player";
+import { Player } from "./player";
 
 const names = [
   "martha",
@@ -29,8 +30,7 @@ function createInitialState(nPlayers: number): GameState {
 [5, 6, 7, 8, 9, 10].forEach((nPlayers) => {
   it(`should assign roles to ${nPlayers} players`, async () => {
     expect.hasAssertions();
-    const shuffle: RolesShuffler = (roles) => roles;
-    const assignRoles = createRoleAssigner(shuffle);
+    const assignRoles = createRoleAssigner(getUnshuffledRolesBag);
 
     const newState = assignRoles(createInitialState(nPlayers));
     for (const player of newState.players) {
@@ -39,9 +39,15 @@ function createInitialState(nPlayers: number): GameState {
   });
 });
 
-it("should reshuffle every time it is called", async () => {
+it("should create new RolesBag every time it is called", async () => {
   expect.hasAssertions();
-  const roles: Role[] = ["fascist", "liberal", "hitler", "liberal", "liberal"];
+  const roles: RolesBag = [
+    "fascist",
+    "liberal",
+    "hitler",
+    "liberal",
+    "liberal",
+  ];
   const shuffle = jest.fn().mockImplementation((_) => [...roles]);
   const assignRoles = createRoleAssigner(shuffle);
 
@@ -52,11 +58,17 @@ it("should reshuffle every time it is called", async () => {
   expect(shuffle).toHaveBeenCalledTimes(2);
 });
 
-it("should assign roles according to shuffled roles", async () => {
+it("should assign roles according to RolesBag", async () => {
   expect.hasAssertions();
-  const roles: Role[] = ["fascist", "liberal", "hitler", "liberal", "liberal"];
-  const shuffle: RolesShuffler = (_) => [...roles].reverse();
-  const assignRoles = createRoleAssigner(shuffle);
+  const roles: RolesBag = [
+    "fascist",
+    "liberal",
+    "hitler",
+    "liberal",
+    "liberal",
+  ];
+  const rolesBagCreator: RolesBagCreator = (_) => [...roles].reverse();
+  const assignRoles = createRoleAssigner(rolesBagCreator);
 
   const newState = assignRoles(createInitialState(roles.length));
   expect(newState.players.map((player) => player.role)).toStrictEqual(roles);
@@ -65,8 +77,8 @@ it("should assign roles according to shuffled roles", async () => {
 it("should throw an error if roles cannot be assigned", async () => {
   expect.hasAssertions();
 
-  const shuffle: RolesShuffler = (_) => [];
-  const assignRoles = createRoleAssigner(shuffle);
+  const rolesBagCreator: RolesBagCreator = (_) => [];
+  const assignRoles = createRoleAssigner(rolesBagCreator);
 
   expect(() => assignRoles(createInitialState(5))).toThrowError(
     "Assigning Roles Failed",
