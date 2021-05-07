@@ -1,7 +1,6 @@
+import { Player } from "../index";
 import createRoleAssigner, { RolesBagCreator } from "./createRoleAssigner";
 import { getUnshuffledRolesBag, RolesBag } from "./createRolesBagCreator";
-import getInitialState, { GameState } from "../initialState";
-import { Player } from "../index";
 
 const names = [
   "martha",
@@ -16,15 +15,11 @@ const names = [
   "oyo",
 ];
 
-function createInitialState(nPlayers: number): GameState {
-  const players: Player[] = names.slice(0, nPlayers).map((name) => ({
+function createInitialState(nPlayers: number): Player[] {
+  return names.slice(0, nPlayers).map((name) => ({
     name,
     role: null,
   }));
-  return {
-    ...getInitialState(),
-    players,
-  };
 }
 
 [5, 6, 7, 8, 9, 10].forEach((nPlayers) => {
@@ -32,8 +27,8 @@ function createInitialState(nPlayers: number): GameState {
     expect.hasAssertions();
     const assignRoles = createRoleAssigner(getUnshuffledRolesBag);
 
-    const newState = assignRoles(createInitialState(nPlayers));
-    for (const player of newState.players) {
+    const players = assignRoles(createInitialState(nPlayers));
+    for (const player of players) {
       expect(player.role).toBeTruthy();
     }
   });
@@ -70,8 +65,8 @@ it("should assign roles according to RolesBag", async () => {
   const rolesBagCreator: RolesBagCreator = (_) => [...roles].reverse();
   const assignRoles = createRoleAssigner(rolesBagCreator);
 
-  const newState = assignRoles(createInitialState(roles.length));
-  expect(newState.players.map((player) => player.role)).toStrictEqual(roles);
+  const players = assignRoles(createInitialState(roles.length));
+  expect(players.map((player) => player.role)).toStrictEqual(roles);
 });
 
 it("should throw an error if roles cannot be assigned", async () => {
