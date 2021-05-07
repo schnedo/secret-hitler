@@ -1,7 +1,7 @@
 import createRoleAssigner, { RolesBagCreator } from "./createRoleAssigner";
 import { getUnshuffledRolesBag, RolesBag } from "./createRolesBagCreator";
-import getInitialState, { GameState } from "./initialState";
-import { Player } from "./player";
+import getInitialState, { GameState } from "../initialState";
+import { Player } from "../index";
 
 const names = [
   "martha",

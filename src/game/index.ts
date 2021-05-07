@@ -1,3 +1,2 @@
-export * from "./gameSlice";
-export { Avatar } from "./player";
+export { Avatar, assignRoles, gameReducer } from "./player";
 export type { Player } from "./player";

@@ -1,4 +1,4 @@
-import { Role } from "./player";
+import { Role } from "../index";
 
 export type RolesBag = Role[];
 

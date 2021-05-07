@@ -1,4 +1,4 @@
-import { Player } from "./player";
+import { Player } from "./index";
 
 export interface GameState {
   players: Player[];

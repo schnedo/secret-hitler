@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import createRoleAssigner from "./createRoleAssigner";
-import createRolesBagCreator from "./createRolesBagCreator";
 import getInitialState from "./initialState";
-import { shuffleArray } from "./shuffleArray";
+import { assignRoles as assignRolesToPlayers } from "./roleAssignment";
 
 const slice = createSlice({
-  name: "game",
+  name: "players",
   initialState: getInitialState(),
   reducers: {
-    assignRoles: createRoleAssigner(createRolesBagCreator(shuffleArray)),
+    assignRoles: assignRolesToPlayers,
   },
 });
 

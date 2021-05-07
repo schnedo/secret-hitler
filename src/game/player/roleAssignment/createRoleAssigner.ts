@@ -1,5 +1,5 @@
 import { RolesBag } from "./createRolesBagCreator";
-import { GameState } from "./initialState";
+import { GameState } from "../initialState";
 
 export interface RolesBagCreator {
   (nPlayers: number): RolesBag;
