@@ -1,35 +1,28 @@
-import React, { ReactElement, useState } from "react";
-import Button from "./components/Button";
+import React, { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "./components";
 import Footer from "./Footer";
-import { Game } from "./game/Game";
-import Avatar from "./game/player/Avatar";
-import { Player } from "./game/player/Player";
-
-const players: Player[] = [
-  new Player("John"),
-  new Player("Martha"),
-  new Player("Bob"),
-  new Player("Alice"),
-  new Player("Mohammed"),
-];
+import { assignRoles, Avatar } from "./game";
+import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const [game, setGame] = useState<Game | null>(null);
+  const players = useSelector((state: RootState) => state.players);
+  const dispatch = useDispatch();
 
-  if (game == null) {
+  if (!players.some((player) => !!player.role)) {
     return (
       <>
         {players.map((player) => (
           <Avatar player={player} />
         ))}
-        <Button onClick={() => setGame(new Game(players))}>Start</Button>
+        <Button onClick={() => dispatch(assignRoles())}>Start</Button>
         <Footer />
       </>
     );
   } else {
     return (
       <>
-        {game.players.map((player) => (
+        {players.map((player) => (
           <Avatar player={player} />
         ))}
       </>
