@@ -16,9 +16,9 @@ export default function createRoleAssigner(
       "liberal",
       "liberal",
     ];
-    shuffle(rolesBag);
+    const shuffledBag = shuffle(rolesBag);
     for (const player of state.players) {
-      const maybeRole = rolesBag.pop();
+      const maybeRole = shuffledBag.pop();
       if (maybeRole === undefined) {
         throw Error("Assigning Roles Failed");
       }
