@@ -8,6 +8,7 @@ export interface AvatarProps {
 export default function Avatar({ player }: AvatarProps): ReactElement {
   return (
     <div>
+      {player.title ? player.title + " " : undefined}
       {player.name}: {player.role}
     </div>
   );

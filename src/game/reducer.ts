@@ -1,18 +1,20 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { startGame } from "./actions";
 
+export type Phase = "nominate";
+
 export interface GameState {
-  isStarted: boolean;
+  phase: Phase | null;
 }
 
 function getInitialState(): GameState {
   return {
-    isStarted: false,
+    phase: null,
   };
 }
 
 export default createReducer(getInitialState(), (builder) => {
   builder.addCase(startGame, (state) => {
-    state.isStarted = true;
+    state.phase = "nominate";
   });
 });

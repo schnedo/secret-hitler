@@ -1,3 +1,4 @@
-export { Avatar, playersReducer } from "./player";
-export type { Player } from "./player";
+export { Avatar, playersReducer, nominateChancellor } from "./player";
+export type { Player, Government } from "./player";
+export * from "./actions";
 export { default as gameReducer } from "./reducer";
