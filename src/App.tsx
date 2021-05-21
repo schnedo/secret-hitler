@@ -2,11 +2,12 @@ import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./components";
 import Footer from "./Footer";
-import { assignRoles, Avatar } from "./game";
+import { Avatar } from "./game";
+import { startGame } from "./game/actions";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const players = useSelector((state: RootState) => state.players);
+  const { players } = useSelector((state: RootState) => state.playersState);
   const dispatch = useDispatch();
 
   if (!players.some((player) => !!player.role)) {
@@ -15,7 +16,7 @@ export default function App(): ReactElement {
         {players.map((player) => (
           <Avatar player={player} />
         ))}
-        <Button onClick={() => dispatch(assignRoles())}>Start</Button>
+        <Button onClick={() => dispatch(startGame())}>Start</Button>
         <Footer />
       </>
     );

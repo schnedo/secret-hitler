@@ -1,2 +1,2 @@
-export { Avatar, assignRoles, playerReducer } from "./player";
+export { Avatar, playersReducer } from "./player";
 export type { Player } from "./player";
