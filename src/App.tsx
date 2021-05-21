@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./components";
 import Footer from "./Footer";
@@ -7,26 +7,29 @@ import { startGame } from "./game/actions";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const { players } = useSelector((state: RootState) => state.playersState);
+  const { players, presidentId, gameIsStarted } = useSelector(
+    (state: RootState) => ({
+      players: state.playersState.players,
+      presidentId: state.playersState.presidentId,
+      gameIsStarted: state.gameState.isStarted,
+    }),
+  );
   const dispatch = useDispatch();
 
-  if (!players.some((player) => !!player.role)) {
-    return (
-      <>
-        {players.map((player) => (
+  return (
+    <>
+      {players.map((player, id) => (
+        <Fragment key={id}>
+          {id === presidentId ? "president" : undefined}
           <Avatar player={player} />
-        ))}
+        </Fragment>
+      ))}
+      {gameIsStarted ? (
+        <></>
+      ) : (
         <Button onClick={() => dispatch(startGame())}>Start</Button>
-        <Footer />
-      </>
-    );
-  } else {
-    return (
-      <>
-        {players.map((player) => (
-          <Avatar player={player} />
-        ))}
-      </>
-    );
-  }
+      )}
+      <Footer />
+    </>
+  );
 }

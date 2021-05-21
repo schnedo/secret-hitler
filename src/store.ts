@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { playersReducer } from "./game";
+import { gameReducer, playersReducer } from "./game";
 
 const store = configureStore({
   reducer: {
+    gameState: gameReducer,
     playersState: playersReducer,
   },
 });
