@@ -8,7 +8,7 @@ function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
-export default function passPresidentialCandidacy(
+export default function nextPresidentialCandidadate(
   currentCandidate: PlayerId | null,
   players: Player[],
 ): PlayerId {

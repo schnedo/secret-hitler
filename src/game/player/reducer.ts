@@ -3,7 +3,7 @@ import { startGame } from "../actions";
 import { Government, nominateChancellor } from "./government";
 import isValidNomination from "./government/isValidNomination";
 import { Player } from "./index";
-import passPresidentialCandidacy from "./passPresidentialCandidacy";
+import nextPresidentialCandidadate from "./nextPresidentialCandidadate";
 import { assignRoles } from "./roleAssignment";
 
 export type PlayerId = number;
@@ -22,6 +22,7 @@ function getInitialState(): PlayersState {
       name,
       role: null,
       title: null,
+      isElectable: true,
     })),
     government: null,
     presidentialCandidate: null,
@@ -32,10 +33,11 @@ export default createReducer(getInitialState(), (builder) => {
   builder
     .addCase(startGame, (state) => {
       state.players = assignRoles(state.players);
-      state.presidentialCandidate = passPresidentialCandidacy(
+      state.presidentialCandidate = nextPresidentialCandidadate(
         state.presidentialCandidate,
         state.players,
       );
+      state.players[state.presidentialCandidate].isElectable = false;
     })
     .addCase(nominateChancellor, (state, { payload: nomination }) => {
       if (

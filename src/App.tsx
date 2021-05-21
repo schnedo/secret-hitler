@@ -23,7 +23,10 @@ export default function App(): ReactElement {
         </Fragment>
       ))}
       {phase === "nominate" ? (
-        <Nomination electablePlayers={[]} onElected={() => undefined} />
+        <Nomination
+          electablePlayers={players.filter(({ isElectable }) => isElectable)}
+          onElected={() => undefined}
+        />
       ) : (
         <></>
       )}
