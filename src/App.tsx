@@ -1,13 +1,15 @@
 import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "./components";
+import { Button, Modal } from "./components";
 import Footer from "./Footer";
 import { Avatar, nominateChancellor, startGame } from "./game";
 import ChancellorNomination from "./ChancellorNomination";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const { players, phase } = useSelector((state: RootState) => state.gameState);
+  const { players, phase, nominatedGovernment } = useSelector(
+    (state: RootState) => state.gameState,
+  );
   const dispatch = useDispatch();
 
   return (
@@ -26,6 +28,14 @@ export default function App(): ReactElement {
             )
           }
         />
+      ) : (
+        <></>
+      )}
+      {phase === "elect" && nominatedGovernment ? (
+        <Modal open>
+          Nominated: president {players[nominatedGovernment.president].name}{" "}
+          chancellor {players[nominatedGovernment.chancellor].name}
+        </Modal>
       ) : (
         <></>
       )}
