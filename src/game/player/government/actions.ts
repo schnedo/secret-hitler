@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
-import Government from "./Government";
+import { PlayerId } from "../Player";
 
-export const nominateChancellor = createAction<Government>(
+export const nominateChancellor = createAction<PlayerId>(
   "government/nominateChancellor",
 );

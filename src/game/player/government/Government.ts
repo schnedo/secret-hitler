@@ -1,4 +1,4 @@
-import { PlayerId } from "../reducer";
+import { PlayerId } from "../Player";
 
 export default interface Government {
   president: PlayerId;

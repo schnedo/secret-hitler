@@ -2,17 +2,12 @@ import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./components";
 import Footer from "./Footer";
-import { Avatar, startGame } from "./game";
-import Nomination from "./Nomination";
+import { Avatar, nominateChancellor, startGame } from "./game";
+import ChancellorNomination from "./ChancellorNomination";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const { players, phase } = useSelector((state: RootState) => ({
-    players: state.playersState.players,
-    phase: state.gameState.phase,
-    presidentialCandidate: state.playersState.presidentialCandidate,
-    government: state.playersState.government,
-  }));
+  const { players, phase } = useSelector((state: RootState) => state.gameState);
   const dispatch = useDispatch();
 
   return (
@@ -23,9 +18,13 @@ export default function App(): ReactElement {
         </Fragment>
       ))}
       {phase === "nominate" ? (
-        <Nomination
+        <ChancellorNomination
           electablePlayers={players.filter(({ isElectable }) => isElectable)}
-          onElected={() => undefined}
+          onNominated={(player) =>
+            dispatch(
+              nominateChancellor(players.findIndex((pl) => pl === player)),
+            )
+          }
         />
       ) : (
         <></>
