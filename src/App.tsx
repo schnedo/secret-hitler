@@ -1,31 +1,40 @@
-import React, { ReactElement } from "react";
+import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "./components";
 import Footer from "./Footer";
-import { assignRoles, Avatar } from "./game";
+import { Avatar, nominateChancellor, startGame } from "./game";
+import ChancellorNomination from "./ChancellorNomination";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const players = useSelector((state: RootState) => state.players);
+  const { players, phase } = useSelector((state: RootState) => state.gameState);
   const dispatch = useDispatch();
 
-  if (!players.some((player) => !!player.role)) {
-    return (
-      <>
-        {players.map((player) => (
+  return (
+    <>
+      {players.map((player, id) => (
+        <Fragment key={id}>
           <Avatar player={player} />
-        ))}
-        <Button onClick={() => dispatch(assignRoles())}>Start</Button>
-        <Footer />
-      </>
-    );
-  } else {
-    return (
-      <>
-        {players.map((player) => (
-          <Avatar player={player} />
-        ))}
-      </>
-    );
-  }
+        </Fragment>
+      ))}
+      {phase === "nominate" ? (
+        <ChancellorNomination
+          electablePlayers={players.filter(({ isElectable }) => isElectable)}
+          onNominated={(player) =>
+            dispatch(
+              nominateChancellor(players.findIndex((pl) => pl === player)),
+            )
+          }
+        />
+      ) : (
+        <></>
+      )}
+      {phase !== null ? (
+        <></>
+      ) : (
+        <Button onClick={() => dispatch(startGame())}>Start</Button>
+      )}
+      <Footer />
+    </>
+  );
 }
