@@ -1,14 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { startGame } from "./actions";
 import {
-  assignRoles,
   Government,
   isValidNomination,
   nextPresidentialCandidate,
   nominateChancellor,
-  Player,
-  PlayerId,
-} from "./player";
+} from "./government";
+import { assignRoles, Player, PlayerId } from "./player";
 
 export type Phase = "nominate" | "elect";
 
