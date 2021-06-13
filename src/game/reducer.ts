@@ -1,14 +1,15 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { startGame } from "./actions";
+import { nominateChancellor, startGame, vote } from "./actions";
 import {
   Government,
   isValidNomination,
   nextPresidentialCandidate,
-  nominateChancellor,
 } from "./government";
 import { assignRoles, Player, PlayerId } from "./player";
 
-export type Phase = "nominate" | "elect";
+export type Phase = "nominate" | "vote" | "evaluateElection";
+
+export type PlayerVotes = Record<PlayerId, boolean>;
 
 export interface GameState {
   phase: Phase | null;
@@ -16,6 +17,7 @@ export interface GameState {
   government: Government | null;
   nominatedGovernment: Government | null;
   presidentialCandidate: PlayerId | null;
+  playerVotes: PlayerVotes;
 }
 
 const playerNames = ["John", "Martha", "Bob", "Alice", "Mohammed"];
@@ -32,6 +34,7 @@ function getInitialState(): GameState {
     government: null,
     nominatedGovernment: null,
     presidentialCandidate: null,
+    playerVotes: {},
   };
 }
 
@@ -63,9 +66,18 @@ export default createReducer(getInitialState(), (builder) => {
           president: state.presidentialCandidate,
           chancellor: nominatedPlayer,
         };
-        state.phase = "elect";
+        state.phase = "vote";
       } else {
         throw Error(`Election of ${nominatedPlayer} is not valid`);
+      }
+    })
+    .addCase(vote, (state, { payload: { agreed, playerId } }) => {
+      if (state.playerVotes[playerId]) {
+        throw Error(`player ${playerId} already voted`);
+      }
+      state.playerVotes[playerId] = agreed;
+      if (Object.keys(state.playerVotes).length === state.players.length) {
+        state.phase = "evaluateElection";
       }
     });
 });

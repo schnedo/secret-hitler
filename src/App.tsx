@@ -1,22 +1,26 @@
 import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Modal, President } from "./components";
+import ChancellorNomination from "./ChancellorNomination";
+import { Button, President } from "./components";
+import Voting from "./components/Voting";
 import Footer from "./Footer";
 import { Avatar, nominateChancellor, startGame } from "./game";
-import ChancellorNomination from "./ChancellorNomination";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const { players, phase, nominatedGovernment, presidentialCandidate } =
-    useSelector((state: RootState) => state.gameState);
+  const { players, phase, presidentialCandidate } = useSelector(
+    (state: RootState) => state.gameState,
+  );
   const dispatch = useDispatch();
 
   return (
     <>
+      <div>{phase}</div>
       {players.map((player, id) => (
         <Fragment key={id}>
           {id === presidentialCandidate ? <President /> : <></>}
           <Avatar player={player} />
+          <Voting playerId={id} />
         </Fragment>
       ))}
       {phase === "nominate" ? (
@@ -28,14 +32,6 @@ export default function App(): ReactElement {
             )
           }
         />
-      ) : (
-        <></>
-      )}
-      {phase === "elect" && nominatedGovernment ? (
-        <Modal open>
-          Nominated: president {players[nominatedGovernment.president].name}{" "}
-          chancellor {players[nominatedGovernment.chancellor].name}
-        </Modal>
       ) : (
         <></>
       )}
