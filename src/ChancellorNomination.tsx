@@ -1,27 +1,34 @@
 import { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Modal } from "./components";
-import { Avatar, Player } from "./game";
+import { Avatar, nominateChancellor } from "./game";
+import { RootState } from "./store";
 
 const NominationRow = styled.div`
   display: flex;
 `;
 
-export interface ChancellorNominationProps {
-  electablePlayers: Player[];
-  onNominated: (player: Player) => void;
-}
+export default function ChancellorNomination(): ReactElement {
+  const { phase, players } = useSelector((state: RootState) => state.gameState);
+  const dispatch = useDispatch();
 
-export default function ChancellorNomination({
-  electablePlayers,
-  onNominated,
-}: ChancellorNominationProps): ReactElement {
+  const electablePlayers = players.filter(({ isElectable }) => isElectable);
+
   return (
-    <Modal open>
+    <Modal open={phase === "nominate"}>
       <div>Please nominate your chancellor candidate.</div>
       {electablePlayers.map((player) => (
         <NominationRow>
-          <button onClick={() => onNominated(player)}>Nominate</button>
+          <button
+            onClick={() =>
+              dispatch(
+                nominateChancellor(players.findIndex((pl) => pl === player)),
+              )
+            }
+          >
+            Nominate
+          </button>
           <Avatar player={player} />
         </NominationRow>
       ))}

@@ -4,7 +4,7 @@ import ChancellorNomination from "./ChancellorNomination";
 import { Button, President } from "./components";
 import Voting from "./components/Voting";
 import Footer from "./Footer";
-import { Avatar, nominateChancellor, startGame } from "./game";
+import { Avatar, startGame } from "./game";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
@@ -23,18 +23,7 @@ export default function App(): ReactElement {
           <Voting playerId={id} />
         </Fragment>
       ))}
-      {phase === "nominate" ? (
-        <ChancellorNomination
-          electablePlayers={players.filter(({ isElectable }) => isElectable)}
-          onNominated={(player) =>
-            dispatch(
-              nominateChancellor(players.findIndex((pl) => pl === player)),
-            )
-          }
-        />
-      ) : (
-        <></>
-      )}
+      <ChancellorNomination />
       {phase !== null ? (
         <></>
       ) : (
