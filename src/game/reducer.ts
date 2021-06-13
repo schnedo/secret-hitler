@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { nominateChancellor, startGame, vote } from "./actions";
+import { acceptElection, nominateChancellor, startGame, vote } from "./actions";
 import {
   Government,
   isValidNomination,
@@ -7,7 +7,11 @@ import {
 } from "./government";
 import { assignRoles, Player, PlayerId } from "./player";
 
-export type Phase = "nominate" | "vote" | "evaluateElection";
+export type Phase =
+  | "nominate"
+  | "vote"
+  | "electionEvaluation"
+  | "legislativeSession";
 
 export type PlayerVotes = Record<PlayerId, boolean>;
 
@@ -18,6 +22,7 @@ export interface GameState {
   nominatedGovernment: Government | null;
   presidentialCandidate: PlayerId | null;
   playerVotes: PlayerVotes;
+  electionRound: 0 | 1 | 2 | 3;
 }
 
 const playerNames = ["John", "Martha", "Bob", "Alice", "Mohammed"];
@@ -35,6 +40,7 @@ function getInitialState(): GameState {
     nominatedGovernment: null,
     presidentialCandidate: null,
     playerVotes: {},
+    electionRound: 0,
   };
 }
 
@@ -77,7 +83,15 @@ export default createReducer(getInitialState(), (builder) => {
       }
       state.playerVotes[playerId] = agreed;
       if (Object.keys(state.playerVotes).length === state.players.length) {
-        state.phase = "evaluateElection";
+        state.phase = "electionEvaluation";
       }
+    })
+    .addCase(acceptElection, (state, action) => {
+      state.electionRound = 0;
+      state.playerVotes = {};
+      state.government = state.nominatedGovernment;
+      state.nominatedGovernment = null;
+      state.presidentialCandidate = null;
+      state.phase = "legislativeSession";
     });
 });

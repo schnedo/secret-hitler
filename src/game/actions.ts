@@ -7,3 +7,4 @@ export const nominateChancellor = createAction<PlayerId>(
   "game/nominateChancellor",
 );
 export const vote = createAction<Vote>("game/vote");
+export const acceptElection = createAction("game/acceptElection");

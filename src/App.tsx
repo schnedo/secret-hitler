@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ChancellorNomination from "./ChancellorNomination";
 import { Button, President } from "./components";
 import Voting from "./components/Voting";
+import ElectionEvaluation from "./ElectionEvaluation";
 import Footer from "./Footer";
 import { Avatar, startGame } from "./game";
 import { RootState } from "./store";
@@ -24,6 +25,7 @@ export default function App(): ReactElement {
         </Fragment>
       ))}
       <ChancellorNomination />
+      <ElectionEvaluation />
       {phase !== null ? (
         <></>
       ) : (
