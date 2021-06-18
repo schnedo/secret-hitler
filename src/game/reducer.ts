@@ -1,8 +1,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
   acceptElection,
-  nominateChancellor,
   declineElection,
+  nominateChancellor,
   startGame,
   vote,
 } from "./actions";
@@ -12,13 +12,16 @@ import {
   isValidNomination,
   nextPresidentialCandidate,
 } from "./government";
+import { discardPolicy, playPolicy } from "./legislation";
 import { assignRoles, Player, PlayerId } from "./player";
 
 export type Phase =
   | "nominate"
   | "vote"
   | "electionEvaluation"
-  | "legislativeSession";
+  | "presidentSelectsPolicies"
+  | "chancellorSelectsPolicies"
+  | "executiveAction";
 
 export type PlayerVotes = Record<PlayerId, boolean>;
 
@@ -96,7 +99,7 @@ export default createReducer(getInitialState(), (builder) => {
       state.playerVotes = {};
       state.government = state.nominatedGovernment;
       state.nominatedGovernment = null;
-      state.phase = "legislativeSession";
+      state.phase = "presidentSelectsPolicies";
     })
     .addCase(declineElection, (state) => {
       if (state.electionRound === 3) {
@@ -117,5 +120,13 @@ export default createReducer(getInitialState(), (builder) => {
         state.players,
       );
       state.phase = "nominate";
+    })
+    .addCase(discardPolicy, (state) => {
+      if (state.phase === "presidentSelectsPolicies") {
+        state.phase = "chancellorSelectsPolicies";
+      }
+    })
+    .addCase(playPolicy, (state) => {
+      state.phase = "executiveAction";
     });
 });
