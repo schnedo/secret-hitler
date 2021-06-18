@@ -1,16 +1,26 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { startGame } from "./actions";
 import {
-  assignRoles,
+  acceptElection,
+  nominateChancellor,
+  declineElection,
+  startGame,
+  vote,
+} from "./actions";
+import {
+  ElectionRound,
   Government,
   isValidNomination,
   nextPresidentialCandidate,
-  nominateChancellor,
-  Player,
-  PlayerId,
-} from "./player";
+} from "./government";
+import { assignRoles, Player, PlayerId } from "./player";
 
-export type Phase = "nominate" | "elect";
+export type Phase =
+  | "nominate"
+  | "vote"
+  | "electionEvaluation"
+  | "legislativeSession";
+
+export type PlayerVotes = Record<PlayerId, boolean>;
 
 export interface GameState {
   phase: Phase | null;
@@ -18,6 +28,8 @@ export interface GameState {
   government: Government | null;
   nominatedGovernment: Government | null;
   presidentialCandidate: PlayerId | null;
+  playerVotes: PlayerVotes;
+  electionRound: ElectionRound;
 }
 
 const playerNames = ["John", "Martha", "Bob", "Alice", "Mohammed"];
@@ -29,11 +41,12 @@ function getInitialState(): GameState {
       name,
       role: null,
       title: null,
-      isElectable: true,
     })),
     government: null,
     nominatedGovernment: null,
     presidentialCandidate: null,
+    playerVotes: {},
+    electionRound: 0,
   };
 }
 
@@ -46,7 +59,6 @@ export default createReducer(getInitialState(), (builder) => {
         state.presidentialCandidate,
         state.players,
       );
-      state.players[state.presidentialCandidate].isElectable = false;
     })
     .addCase(nominateChancellor, (state, { payload: nominatedPlayer }) => {
       if (state.presidentialCandidate === null) {
@@ -65,9 +77,45 @@ export default createReducer(getInitialState(), (builder) => {
           president: state.presidentialCandidate,
           chancellor: nominatedPlayer,
         };
-        state.phase = "elect";
+        state.phase = "vote";
       } else {
         throw Error(`Election of ${nominatedPlayer} is not valid`);
       }
+    })
+    .addCase(vote, (state, { payload: { agreed, playerId } }) => {
+      if (state.playerVotes[playerId]) {
+        throw Error(`player ${playerId} already voted`);
+      }
+      state.playerVotes[playerId] = agreed;
+      if (Object.keys(state.playerVotes).length === state.players.length) {
+        state.phase = "electionEvaluation";
+      }
+    })
+    .addCase(acceptElection, (state) => {
+      state.electionRound = 0;
+      state.playerVotes = {};
+      state.government = state.nominatedGovernment;
+      state.nominatedGovernment = null;
+      state.phase = "legislativeSession";
+    })
+    .addCase(declineElection, (state) => {
+      if (state.electionRound === 3) {
+        throw Error("failed election NYI");
+      }
+      if (state.presidentialCandidate === null) {
+        // this should never happen as chancellor nomination should always only be possible when presidential candidate is chosen
+        throw Error(
+          `cannot nominate chancellor without presidential candidate`,
+        );
+      }
+
+      state.electionRound += 1;
+      state.playerVotes = {};
+      state.nominatedGovernment = null;
+      state.presidentialCandidate = nextPresidentialCandidate(
+        state.presidentialCandidate,
+        state.players,
+      );
+      state.phase = "nominate";
     });
 });
