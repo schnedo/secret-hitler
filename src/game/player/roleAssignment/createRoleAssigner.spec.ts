@@ -19,6 +19,7 @@ function createInitialState(nPlayers: number): Player[] {
   return names.slice(0, nPlayers).map((name) => ({
     name,
     role: null,
+    title: null,
   }));
 }
 
