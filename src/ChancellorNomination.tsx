@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Modal } from "./components";
-import { Avatar, nominateChancellor } from "./game";
+import { Avatar, isValidNomination, nominateChancellor } from "./game";
 import { RootState } from "./store";
 
 const NominationRow = styled.div`
@@ -10,10 +10,20 @@ const NominationRow = styled.div`
 `;
 
 export default function ChancellorNomination(): ReactElement {
-  const { phase, players } = useSelector((state: RootState) => state.gameState);
+  const { phase, players, presidentialCandidate, government } = useSelector(
+    (state: RootState) => state.gameState,
+  );
   const dispatch = useDispatch();
 
-  const electablePlayers = players.filter(({ isElectable }) => isElectable);
+  const electablePlayers =
+    presidentialCandidate === null
+      ? []
+      : players.filter((player, id) =>
+          isValidNomination(players.length, government, {
+            president: presidentialCandidate,
+            chancellor: id,
+          }),
+        );
 
   return (
     <Modal open={phase === "nominate"}>

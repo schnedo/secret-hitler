@@ -8,3 +8,4 @@ export const nominateChancellor = createAction<PlayerId>(
 );
 export const vote = createAction<Vote>("game/vote");
 export const acceptElection = createAction("game/acceptElection");
+export const declineElection = createAction("game/declineElection");

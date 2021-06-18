@@ -1,6 +1,13 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { acceptElection, nominateChancellor, startGame, vote } from "./actions";
 import {
+  acceptElection,
+  nominateChancellor,
+  declineElection,
+  startGame,
+  vote,
+} from "./actions";
+import {
+  ElectionRound,
   Government,
   isValidNomination,
   nextPresidentialCandidate,
@@ -22,7 +29,7 @@ export interface GameState {
   nominatedGovernment: Government | null;
   presidentialCandidate: PlayerId | null;
   playerVotes: PlayerVotes;
-  electionRound: 0 | 1 | 2 | 3;
+  electionRound: ElectionRound;
 }
 
 const playerNames = ["John", "Martha", "Bob", "Alice", "Mohammed"];
@@ -34,7 +41,6 @@ function getInitialState(): GameState {
       name,
       role: null,
       title: null,
-      isElectable: true,
     })),
     government: null,
     nominatedGovernment: null,
@@ -53,7 +59,6 @@ export default createReducer(getInitialState(), (builder) => {
         state.presidentialCandidate,
         state.players,
       );
-      state.players[state.presidentialCandidate].isElectable = false;
     })
     .addCase(nominateChancellor, (state, { payload: nominatedPlayer }) => {
       if (state.presidentialCandidate === null) {
@@ -86,12 +91,31 @@ export default createReducer(getInitialState(), (builder) => {
         state.phase = "electionEvaluation";
       }
     })
-    .addCase(acceptElection, (state, action) => {
+    .addCase(acceptElection, (state) => {
       state.electionRound = 0;
       state.playerVotes = {};
       state.government = state.nominatedGovernment;
       state.nominatedGovernment = null;
-      state.presidentialCandidate = null;
       state.phase = "legislativeSession";
+    })
+    .addCase(declineElection, (state) => {
+      if (state.electionRound === 3) {
+        throw Error("failed election NYI");
+      }
+      if (state.presidentialCandidate === null) {
+        // this should never happen as chancellor nomination should always only be possible when presidential candidate is chosen
+        throw Error(
+          `cannot nominate chancellor without presidential candidate`,
+        );
+      }
+
+      state.electionRound += 1;
+      state.playerVotes = {};
+      state.nominatedGovernment = null;
+      state.presidentialCandidate = nextPresidentialCandidate(
+        state.presidentialCandidate,
+        state.players,
+      );
+      state.phase = "nominate";
     });
 });

@@ -4,12 +4,13 @@ import ChancellorNomination from "./ChancellorNomination";
 import { Button, President } from "./components";
 import Voting from "./components/Voting";
 import ElectionEvaluation from "./ElectionEvaluation";
+import FailedElectionCounter from "./FailedElectionCounter";
 import Footer from "./Footer";
 import { Avatar, startGame } from "./game";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const { players, phase, presidentialCandidate } = useSelector(
+  const { players, phase, presidentialCandidate, electionRound } = useSelector(
     (state: RootState) => state.gameState,
   );
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function App(): ReactElement {
   return (
     <>
       <div>{phase}</div>
+      <FailedElectionCounter electionCounter={electionRound} />
       {players.map((player, id) => (
         <Fragment key={id}>
           {id === presidentialCandidate ? <President /> : <></>}
