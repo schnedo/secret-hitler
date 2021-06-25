@@ -4,7 +4,7 @@ import Policy from "./Policy";
 const nLiberalPolicies = 6;
 const nFascistPolicies = 11;
 
-export default function createPolicyStack(): Policy[] {
+export default function createPolicyDeck(): Policy[] {
   let stack: Policy[] = [];
   for (let i = 0; i < nLiberalPolicies; i++) {
     stack.push("liberal");

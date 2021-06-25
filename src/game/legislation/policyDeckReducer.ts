@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { shuffleArray } from "../../utils";
 import { discardPolicy, playPolicy } from "./actions";
-import createPolicyStack from "./createPolicyStack";
+import createPolicyDeck from "./createPolicyDeck";
 import Policy from "./Policy";
 
 export interface PolicyDeckReducer {
@@ -13,7 +13,7 @@ export interface PolicyDeckReducer {
 
 function getInitialState(): PolicyDeckReducer {
   return {
-    drawingPile: createPolicyStack(),
+    drawingPile: createPolicyDeck(),
     discardPile: [],
     nLiberalsPlayed: 0,
     nFascistsPlayed: 0,
