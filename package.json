@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://schnedo.github.io/secret-hitler",
   "dependencies": {
-    "@reduxjs/toolkit": "1.6.0",
+    "@reduxjs/toolkit": "1.6.1",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.0.0",
     "@testing-library/user-event": "13.2.0",
