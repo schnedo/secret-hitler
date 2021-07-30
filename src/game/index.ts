@@ -1,5 +1,9 @@
 export type { Government, ElectionRound } from "./election";
-export { isValidNomination } from "./election";
+export {
+  isValidNomination,
+  ChancellorNomination,
+  ElectionEvaluation,
+} from "./election";
 export { Avatar } from "./player";
 export type { Player } from "./player";
 export * from "./actions";

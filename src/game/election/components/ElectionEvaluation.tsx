@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "./components";
-import { acceptElection, declineElection } from "./game";
-import { RootState } from "./store";
+import { Modal } from "../../../components";
+import { acceptElection, declineElection } from "../../index";
+import { RootState } from "../../../store";
 
 export default function ElectionEvaluation(): ReactElement {
   const { phase, playerVotes, players } = useSelector(

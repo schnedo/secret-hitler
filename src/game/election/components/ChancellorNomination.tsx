@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { Modal } from "./components";
-import { Avatar, isValidNomination, nominateChancellor } from "./game";
-import { RootState } from "./store";
+import { Modal } from "../../../components";
+import { Avatar, isValidNomination, nominateChancellor } from "../../index";
+import { RootState } from "../../../store";
 
 const NominationRow = styled.div`
   display: flex;

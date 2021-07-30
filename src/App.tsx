@@ -1,12 +1,15 @@
 import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ChancellorNomination from "./ChancellorNomination";
 import { Button, Chancellor, President } from "./components";
 import Voting from "./components/Voting";
-import ElectionEvaluation from "./ElectionEvaluation";
 import FailedElectionCounter from "./FailedElectionCounter";
 import Footer from "./Footer";
-import { Avatar, startGame } from "./game";
+import {
+  Avatar,
+  ChancellorNomination,
+  ElectionEvaluation,
+  startGame,
+} from "./game";
 import PolicyCardFields from "./PolicyCardFields";
 import DiscardPolicy from "./DiscardPolicy";
 import { RootState } from "./store";
