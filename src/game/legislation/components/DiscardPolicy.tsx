@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../components";
-import { discardPolicy, playPolicy } from "..";
 import { RootState } from "../../../store";
+import { discardPolicy, playPolicy } from "../actions";
 
 export default function DiscardPolicy(): ReactElement {
   const {
