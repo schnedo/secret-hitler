@@ -9,6 +9,8 @@ import {
   DiscardPolicy,
   ElectionEvaluation,
   FailedElectionCounter,
+  isValidNomination,
+  nominateChancellor,
   PolicyCardFields,
   startGame,
   Voting,
@@ -33,7 +35,10 @@ export default function App(): ReactElement {
           <Voting playerId={id} />
         </Fragment>
       ))}
-      <ChancellorNomination />
+      <ChancellorNomination
+        onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
+        nominationValidator={isValidNomination}
+      />
       {phase === "electionEvaluation" ? (
         <ElectionEvaluation
           onElectionAccepted={() => dispatch(acceptElection())}

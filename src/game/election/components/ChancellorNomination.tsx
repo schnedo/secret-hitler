@@ -1,27 +1,37 @@
 import { ReactElement } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Modal } from "../../../components";
 import { RootState } from "../../../store";
-import { Avatar } from "../../player";
-import { nominateChancellor } from "../actions";
-import isValidNomination from "../isValidNomination";
+import { Avatar, PlayerId } from "../../player";
+import Government from "../Government";
 
 const NominationRow = styled.div`
   display: flex;
 `;
 
-export default function ChancellorNomination(): ReactElement {
+export interface ChancellorNominationProps {
+  onNomination: (playerId: PlayerId) => void;
+  nominationValidator: (
+    numPlayers: number,
+    lastGovernment: Government | null,
+    nomination: Government,
+  ) => boolean;
+}
+
+export default function ChancellorNomination({
+  onNomination,
+  nominationValidator,
+}: ChancellorNominationProps): ReactElement {
   const { phase, players, presidentialCandidate, government } = useSelector(
     (state: RootState) => state.gameState,
   );
-  const dispatch = useDispatch();
 
   const electablePlayers =
     presidentialCandidate === null
       ? []
       : players.filter((player, id) =>
-          isValidNomination(players.length, government, {
+          nominationValidator(players.length, government, {
             president: presidentialCandidate,
             chancellor: id,
           }),
@@ -34,9 +44,7 @@ export default function ChancellorNomination(): ReactElement {
         <NominationRow>
           <button
             onClick={() =>
-              dispatch(
-                nominateChancellor(players.findIndex((pl) => pl === player)),
-              )
+              onNomination(players.findIndex((pl) => pl === player))
             }
           >
             Nominate
