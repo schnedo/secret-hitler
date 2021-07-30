@@ -13,6 +13,7 @@ import {
   nominateChancellor,
   PolicyCardFields,
   startGame,
+  vote as voteAction,
   Voting,
 } from "./game";
 import { RootState } from "./store";
@@ -32,7 +33,7 @@ export default function App(): ReactElement {
           {id === presidentialCandidate ? <President /> : <></>}
           {id === government?.chancellor ? <Chancellor /> : <></>}
           <Avatar player={player} />
-          <Voting playerId={id} />
+          <Voting playerId={id} onVote={(vote) => dispatch(voteAction(vote))} />
         </Fragment>
       ))}
       <ChancellorNomination

@@ -1,18 +1,21 @@
 import { ReactElement } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { vote } from "../actions";
+import { useSelector } from "react-redux";
 import { PlayerId } from "../../player";
 import { RootState } from "../../../store";
+import Vote from "../Vote";
 
 export interface VotingProps {
   playerId: PlayerId;
+  onVote: (vote: Vote) => void;
 }
 
-export default function Voting({ playerId }: VotingProps): ReactElement {
+export default function Voting({
+  playerId,
+  onVote,
+}: VotingProps): ReactElement {
   const { phase, playerVotes } = useSelector(
     (state: RootState) => state.gameState,
   );
-  const dispatch = useDispatch();
 
   if (phase !== "vote") {
     return <></>;
@@ -23,12 +26,8 @@ export default function Voting({ playerId }: VotingProps): ReactElement {
   }
   return (
     <div>
-      <button onClick={() => dispatch(vote({ playerId, agreed: true }))}>
-        Yes
-      </button>
-      <button onClick={() => dispatch(vote({ playerId, agreed: false }))}>
-        No
-      </button>
+      <button onClick={() => onVote({ playerId, agreed: true })}>Yes</button>
+      <button onClick={() => onVote({ playerId, agreed: false })}>No</button>
     </div>
   );
 }
