@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { Vote } from "./government";
+import { Vote } from "./election";
 import { PlayerId } from "./player";
 
 export const startGame = createAction("game/start");

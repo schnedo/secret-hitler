@@ -11,7 +11,7 @@ import {
   Government,
   isValidNomination,
   nextPresidentialCandidate,
-} from "./government";
+} from "./election";
 import { discardPolicy, playPolicy } from "./legislation";
 import { assignRoles, Player, PlayerId } from "./player";
 
