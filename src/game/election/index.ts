@@ -4,3 +4,4 @@ export { default as nextPresidentialCandidate } from "./nextPresidentialCandidat
 export type { default as Vote } from "./Vote";
 export type { default as ElectionRound } from "./ElectionRound";
 export * from "./components";
+export * from "./actions";

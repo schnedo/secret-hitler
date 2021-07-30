@@ -1,16 +1,14 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { startGame } from "./actions";
 import {
   acceptElection,
   declineElection,
-  nominateChancellor,
-  startGame,
-  vote,
-} from "./actions";
-import {
   ElectionRound,
   Government,
   isValidNomination,
   nextPresidentialCandidate,
+  nominateChancellor,
+  vote,
 } from "./election";
 import { discardPolicy, playPolicy } from "./legislation";
 import { assignRoles, Player, PlayerId } from "./player";

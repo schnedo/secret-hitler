@@ -4,6 +4,7 @@ export {
   ChancellorNomination,
   ElectionEvaluation,
   FailedElectionCounter,
+  vote,
   Voting,
 } from "./election";
 export { Avatar } from "./player";
@@ -18,3 +19,6 @@ export {
   DiscardPolicy,
 } from "./legislation";
 export type { Policy } from "./legislation";
+export { declineElection } from "./election";
+export { acceptElection } from "./election";
+export { nominateChancellor } from "./election";
