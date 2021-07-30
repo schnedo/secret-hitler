@@ -1,22 +1,29 @@
 import { ReactElement } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Modal } from "../../../components";
-import { acceptElection, declineElection } from "../actions";
 import { RootState } from "../../../store";
 
-export default function ElectionEvaluation(): ReactElement {
+export interface ElectionEvaluationProps {
+  onElectionAccepted: () => void;
+  onElectionDeclined: () => void;
+}
+
+export default function ElectionEvaluation({
+  onElectionAccepted,
+  onElectionDeclined,
+}: ElectionEvaluationProps): ReactElement {
   const { phase, playerVotes, players } = useSelector(
     (state: RootState) => state.gameState,
   );
-  const dispatch = useDispatch();
 
   if (phase !== "electionEvaluation") {
     return <></>;
   }
   const electionAccepted =
     Object.values(playerVotes).filter(Boolean).length > players.length / 2;
-  const continueAction = () =>
-    dispatch(electionAccepted ? acceptElection() : declineElection());
+  const continueAction = electionAccepted
+    ? onElectionAccepted
+    : onElectionDeclined;
 
   return (
     <Modal open>

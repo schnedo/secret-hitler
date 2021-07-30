@@ -2,8 +2,10 @@ import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Chancellor, Footer, President } from "./components";
 import {
+  acceptElection,
   Avatar,
   ChancellorNomination,
+  declineElection,
   DiscardPolicy,
   ElectionEvaluation,
   FailedElectionCounter,
@@ -32,7 +34,14 @@ export default function App(): ReactElement {
         </Fragment>
       ))}
       <ChancellorNomination />
-      <ElectionEvaluation />
+      {phase === "electionEvaluation" ? (
+        <ElectionEvaluation
+          onElectionAccepted={() => dispatch(acceptElection())}
+          onElectionDeclined={() => dispatch(declineElection())}
+        />
+      ) : (
+        <></>
+      )}
       <DiscardPolicy />
       {phase !== null ? (
         <></>
