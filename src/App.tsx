@@ -6,11 +6,13 @@ import {
   Avatar,
   ChancellorNomination,
   declineElection,
+  discardPolicy,
   DiscardPolicy,
   ElectionEvaluation,
   FailedElectionCounter,
   isValidNomination,
   nominateChancellor,
+  playPolicy,
   PolicyCardFields,
   startGame,
   vote as voteAction,
@@ -49,7 +51,10 @@ export default function App(): ReactElement {
       ) : (
         <></>
       )}
-      <DiscardPolicy />
+      <DiscardPolicy
+        onDiscard={(index) => dispatch(discardPolicy(index))}
+        onPlay={() => dispatch(playPolicy)}
+      />
       {phase !== null ? (
         <></>
       ) : (

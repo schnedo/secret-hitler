@@ -1,10 +1,17 @@
 import { ReactElement } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Modal } from "../../../components";
 import { RootState } from "../../../store";
-import { discardPolicy, playPolicy } from "../actions";
 
-export default function DiscardPolicy(): ReactElement {
+export interface DiscardPolicyProps {
+  onDiscard: (index: number) => void;
+  onPlay: () => void;
+}
+
+export default function DiscardPolicy({
+  onDiscard,
+  onPlay,
+}: DiscardPolicyProps): ReactElement {
   const {
     gameState: { phase },
     policyDeck: { drawingPile },
@@ -12,7 +19,6 @@ export default function DiscardPolicy(): ReactElement {
     gameState,
     policyDeck,
   }));
-  const dispatch = useDispatch();
 
   if (
     phase !== "presidentSelectsPolicies" &&
@@ -25,9 +31,9 @@ export default function DiscardPolicy(): ReactElement {
 
   const nCardsToDraw = isChancellorDiscard ? 2 : 3;
   const handleClick = (index: number) => {
-    dispatch(discardPolicy(index));
+    onDiscard(index);
     if (isChancellorDiscard) {
-      dispatch(playPolicy());
+      onPlay();
     }
   };
 
