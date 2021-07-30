@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { vote } from "../../index";
+import { vote } from "../actions";
 import { PlayerId } from "../../player";
 import { RootState } from "../../../store";
 

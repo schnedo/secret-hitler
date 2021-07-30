@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "../../../components";
-import { acceptElection, declineElection } from "../../index";
+import { acceptElection, declineElection } from "../actions";
 import { RootState } from "../../../store";
 
 export default function ElectionEvaluation(): ReactElement {
