@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { ElectionRound } from "./game";
+import { ElectionRound } from "../index";
 
 export interface FailedElectionCounterProps {
   electionCounter: ElectionRound;

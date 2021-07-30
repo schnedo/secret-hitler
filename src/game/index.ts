@@ -3,6 +3,7 @@ export {
   isValidNomination,
   ChancellorNomination,
   ElectionEvaluation,
+  FailedElectionCounter,
 } from "./election";
 export { Avatar } from "./player";
 export type { Player } from "./player";
