@@ -39,6 +39,7 @@ export default function App(): ReactElement {
       <ChancellorNomination
         onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
         nominationValidator={isValidNomination}
+        avatarComponent={(player) => <Avatar player={player} />}
       />
       {phase === "electionEvaluation" ? (
         <ElectionEvaluation

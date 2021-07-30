@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { Modal } from "../../../components";
 import { RootState } from "../../../store";
-import { Avatar, PlayerId } from "../../player";
+import type { PlayerId, Player } from "../../player";
 import Government from "../Government";
 
 const NominationRow = styled.div`
@@ -17,11 +17,13 @@ export interface ChancellorNominationProps {
     lastGovernment: Government | null,
     nomination: Government,
   ) => boolean;
+  avatarComponent: (player: Player) => ReactElement;
 }
 
 export default function ChancellorNomination({
   onNomination,
   nominationValidator,
+  avatarComponent,
 }: ChancellorNominationProps): ReactElement {
   const { phase, players, presidentialCandidate, government } = useSelector(
     (state: RootState) => state.gameState,
@@ -49,7 +51,7 @@ export default function ChancellorNomination({
           >
             Nominate
           </button>
-          <Avatar player={player} />
+          {avatarComponent(player)}
         </NominationRow>
       ))}
     </Modal>
