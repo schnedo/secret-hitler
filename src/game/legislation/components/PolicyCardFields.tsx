@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "./store";
+import { RootState } from "../../../store";
 
 export default function PolicyCardFields(): ReactElement {
   const policyDeck = useSelector((state: RootState) => state.policyDeck);

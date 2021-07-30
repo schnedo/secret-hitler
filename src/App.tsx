@@ -6,12 +6,12 @@ import Footer from "./Footer";
 import {
   Avatar,
   ChancellorNomination,
+  DiscardPolicy,
   ElectionEvaluation,
   FailedElectionCounter,
+  PolicyCardFields,
   startGame,
 } from "./game";
-import PolicyCardFields from "./PolicyCardFields";
-import DiscardPolicy from "./DiscardPolicy";
 import { RootState } from "./store";
 
 export default function App(): ReactElement {
