@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { vote } from "../game";
-import { PlayerId } from "../game/player";
-import { RootState } from "../store";
+import { vote } from "../../index";
+import { PlayerId } from "../../player";
+import { RootState } from "../../../store";
 
 export interface VotingProps {
   playerId: PlayerId;

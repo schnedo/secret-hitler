@@ -1,7 +1,6 @@
 import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Chancellor, President } from "./components";
-import Voting from "./components/Voting";
 import Footer from "./Footer";
 import {
   Avatar,
@@ -11,6 +10,7 @@ import {
   FailedElectionCounter,
   PolicyCardFields,
   startGame,
+  Voting,
 } from "./game";
 import { RootState } from "./store";
 
