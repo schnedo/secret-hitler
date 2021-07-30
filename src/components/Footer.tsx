@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from "react";
-import Button from "./components/Button";
+import Button from "./Button";
 import License from "./License";
 
 export default function Footer(): ReactElement {

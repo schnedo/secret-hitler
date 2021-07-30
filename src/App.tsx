@@ -1,7 +1,6 @@
 import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Chancellor, President } from "./components";
-import Footer from "./Footer";
+import { Button, Chancellor, Footer, President } from "./components";
 import {
   Avatar,
   ChancellorNomination,

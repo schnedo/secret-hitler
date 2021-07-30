@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import Modal from "./components/Modal";
+import Modal from "./Modal";
 
 export interface LicenseProps {
   open: boolean;
