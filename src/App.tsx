@@ -1,15 +1,24 @@
 import React, { Fragment, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ChancellorNomination from "./ChancellorNomination";
-import { Button, Chancellor, President } from "./components";
-import Voting from "./components/Voting";
-import ElectionEvaluation from "./ElectionEvaluation";
-import FailedElectionCounter from "./FailedElectionCounter";
-import Footer from "./Footer";
-import { Avatar, startGame } from "./game";
-import PolicyCardFields from "./PolicyCardFields";
-import DiscardPolicy from "./DiscardPolicy";
-import { RootState } from "./store";
+import { Button, Chancellor, Footer, President } from "./components";
+import {
+  acceptElection,
+  Avatar,
+  ChancellorNomination,
+  declineElection,
+  discardPolicy,
+  DiscardPolicy,
+  ElectionEvaluation,
+  FailedElectionCounter,
+  isValidNomination,
+  nominateChancellor,
+  playPolicy,
+  PolicyCardFields,
+  startGame,
+  vote as voteAction,
+  Voting,
+} from "./game";
+import type { RootState } from "./store";
 
 export default function App(): ReactElement {
   const { players, phase, presidentialCandidate, electionRound, government } =
@@ -26,12 +35,26 @@ export default function App(): ReactElement {
           {id === presidentialCandidate ? <President /> : <></>}
           {id === government?.chancellor ? <Chancellor /> : <></>}
           <Avatar player={player} />
-          <Voting playerId={id} />
+          <Voting playerId={id} onVote={(vote) => dispatch(voteAction(vote))} />
         </Fragment>
       ))}
-      <ChancellorNomination />
-      <ElectionEvaluation />
-      <DiscardPolicy />
+      <ChancellorNomination
+        onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
+        nominationValidator={isValidNomination}
+        avatarComponent={(player) => <Avatar player={player} />}
+      />
+      {phase === "electionEvaluation" ? (
+        <ElectionEvaluation
+          onElectionAccepted={() => dispatch(acceptElection())}
+          onElectionDeclined={() => dispatch(declineElection())}
+        />
+      ) : (
+        <></>
+      )}
+      <DiscardPolicy
+        onDiscard={(index) => dispatch(discardPolicy(index))}
+        onPlay={() => dispatch(playPolicy)}
+      />
       {phase !== null ? (
         <></>
       ) : (

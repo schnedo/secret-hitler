@@ -1,4 +1,4 @@
-import { PlayerId } from "../player";
+import type { PlayerId } from "../player";
 
 export default interface Government {
   president: PlayerId;

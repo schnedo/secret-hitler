@@ -1,4 +1,4 @@
-import Role from "./roleAssignment/Role";
+import type Role from "./roleAssignment/Role";
 
 export type PlayerId = number;
 
