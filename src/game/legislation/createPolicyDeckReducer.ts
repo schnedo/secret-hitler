@@ -3,8 +3,8 @@ import {
   ActionCreatorWithPayload,
   createReducer,
 } from "@reduxjs/toolkit";
-import PolicyDeck from "./PolicyDeck";
-import { PolicyDeckShuffler } from "./PolicyDeckShuffler";
+import type PolicyDeck from "./PolicyDeck";
+import type { PolicyDeckShuffler } from "./PolicyDeckShuffler";
 
 export interface PolicyDeckReducer {
   drawingPile: PolicyDeck;

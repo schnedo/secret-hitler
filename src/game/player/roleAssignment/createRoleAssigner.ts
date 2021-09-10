@@ -1,5 +1,5 @@
-import Player from "../Player";
-import { RolesBag } from "./createRolesBagCreator";
+import type Player from "../Player";
+import type { RolesBag } from "./createRolesBagCreator";
 
 export interface RolesBagCreator {
   (nPlayers: number): RolesBag;

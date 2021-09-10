@@ -18,7 +18,7 @@ import {
   vote as voteAction,
   Voting,
 } from "./game";
-import { RootState } from "./store";
+import type { RootState } from "./store";
 
 export default function App(): ReactElement {
   const { players, phase, presidentialCandidate, electionRound, government } =

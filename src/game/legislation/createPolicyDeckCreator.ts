@@ -1,5 +1,5 @@
-import { PolicyDeckShuffler } from "./PolicyDeckShuffler";
-import PolicyDeck from "./PolicyDeck";
+import type PolicyDeck from "./PolicyDeck";
+import type { PolicyDeckShuffler } from "./PolicyDeckShuffler";
 
 const nLiberalPolicies = 6;
 const nFascistPolicies = 11;

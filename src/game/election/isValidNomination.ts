@@ -1,4 +1,4 @@
-import Government from "./Government";
+import type Government from "./Government";
 
 export default function isValidNomination(
   numPlayers: number,

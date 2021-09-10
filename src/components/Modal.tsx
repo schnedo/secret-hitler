@@ -1,4 +1,4 @@
-import { MouseEventHandler, ReactElement, ReactNode } from "react";
+import type { MouseEventHandler, ReactElement, ReactNode } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 
 const Global = createGlobalStyle`

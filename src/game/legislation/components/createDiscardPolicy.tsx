@@ -1,7 +1,7 @@
-import { ComponentType, ReactElement } from "react";
+import type { ComponentType, ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { ModalProps } from "../../../components/Modal";
-import { RootState } from "../../../store";
+import type { ModalProps } from "../../../components/Modal";
+import type { RootState } from "../../../store";
 
 export interface DiscardPolicyProps {
   onDiscard: (index: number) => void;

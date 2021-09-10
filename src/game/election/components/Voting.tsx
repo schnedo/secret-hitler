@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { PlayerId } from "../../player";
-import { RootState } from "../../../store";
-import Vote from "../Vote";
+import type { RootState } from "../../../store";
+import type { PlayerId } from "../../player";
+import type Vote from "../Vote";
 
 export interface VotingProps {
   playerId: PlayerId;
