@@ -1,6 +1,6 @@
 import type { MouseEventHandler, ReactElement, ReactText } from "react";
 
-interface ButtonProps {
+export interface ButtonProps {
   onClick?: MouseEventHandler;
   children: ReactText;
 }
