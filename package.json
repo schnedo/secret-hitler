@@ -66,6 +66,6 @@
     ]
   },
   "devDependencies": {
-    "dependency-cruiser": "^10.0.6"
+    "dependency-cruiser": "10.0.6"
   }
 }
