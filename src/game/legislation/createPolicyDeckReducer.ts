@@ -30,8 +30,8 @@ function getInitialState(
 export interface CreatePolicyDeckReducerOptions {
   shuffle: PolicyDeckShuffler;
   createPolicyDeck: PolicyDeckCreator;
-  discardPolicyActionCreator: ActionCreatorWithPayload<number, string>;
-  playPolicyActionCreator: ActionCreatorWithoutPayload<"policy/play">;
+  discardPolicyActionCreator: ActionCreatorWithPayload<number>;
+  playPolicyActionCreator: ActionCreatorWithoutPayload;
 }
 
 export default function createPolicyDeckReducer({
