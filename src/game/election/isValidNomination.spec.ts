@@ -1,4 +1,4 @@
-import Government from "./Government";
+import type Government from "./Government";
 import isValidNomination from "./isValidNomination";
 
 it("should not restrict eligibility of presidentialCandidate", async () => {

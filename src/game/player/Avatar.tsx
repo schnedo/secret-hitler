@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import Player from "./Player";
+import type { ReactElement } from "react";
+import type Player from "./Player";
 
 export interface AvatarProps {
   player: Player;
