@@ -4,6 +4,7 @@ import {
   createReducer,
 } from "@reduxjs/toolkit";
 import PolicyDeck from "./PolicyDeck";
+import { PolicyDeckShuffler } from "./PolicyDeckShuffler";
 
 export interface PolicyDeckReducer {
   drawingPile: PolicyDeck;
@@ -26,11 +27,6 @@ function getInitialState(
     nFascistsPlayed: 0,
   };
 }
-
-export interface PolicyDeckShuffler {
-  (policyDeck: PolicyDeck): PolicyDeck;
-}
-
 export interface CreatePolicyDeckReducerOptions {
   shuffle: PolicyDeckShuffler;
   createPolicyDeck: PolicyDeckCreator;
