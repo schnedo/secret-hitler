@@ -1,6 +1,51 @@
 /** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
   forbidden: [
+    {
+      name: "only-same-package-or-index",
+      severity: "error",
+      from: {
+        path: "^(.*)/[^/]+$",
+        pathNot: "\\.d\\.ts$", // TypeScript declaration files
+      },
+      to: {
+        pathNot: [
+          "^$1/[^/]+$", // same package
+          "index\\.(ts|tsx|js|jsx)$",
+          "^node_modules",
+        ],
+      },
+    },
+    {
+      name: "not-to-own-index-file",
+      severity: "error",
+      from: {
+        path: "(.*)/[^/]+",
+        pathNot: "index\\.(js|jsx|ts|tsx)",
+      },
+      to: {
+        path: [
+          "$1/index", // not to own index file
+        ],
+        pathNot: ["^node_modules"],
+      },
+    },
+    {
+      name: "no-unreachable-from-root",
+      severity: "error",
+      from: {
+        path: "src/index\\.tsx",
+      },
+      to: {
+        path: "^src",
+        pathNot: [
+          "\\.(spec|test)\\.(js|ts|jsx|tsx)$", // test files
+          "\\.d\\.ts$", // TypeScript declaration files
+          "src/setupTests.ts", // test setup
+        ],
+        reachable: false,
+      },
+    },
     /* rules from the 'recommended' preset: */
     {
       name: "no-circular",
@@ -141,8 +186,10 @@ module.exports = {
         "from.pathNot re of the not-to-dev-dep rule in the dependency-cruiser configuration",
       from: {
         path: "^(src)",
-        pathNot:
-          "\\.(spec|test)\\.(js|mjs|cjs|ts|ls|coffee|litcoffee|coffee\\.md)$",
+        pathNot: [
+          "\\.(spec|test)\\.(js|jsx|mjs|cjs|ts|tsx|ls|coffee|litcoffee|coffee\\.md)$",
+          "src/setupTests.ts",
+        ],
       },
       to: {
         dependencyTypes: ["npm-dev"],
