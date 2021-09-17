@@ -21,32 +21,58 @@ import {
 import type { RootState } from "./store";
 
 export default function App(): ReactElement {
-  const { players, phase, presidentialCandidate, electionRound, government } =
-    useSelector((state: RootState) => state.gameState);
+  const {
+    gameState: {
+      players,
+      playerVotes,
+      phase,
+      presidentialCandidate,
+      electionRound,
+      government,
+    },
+    policyDeck: { drawingPile, discardPile, nFascistsPlayed, nLiberalsPlayed },
+  } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
   return (
     <>
       <div>{phase}</div>
-      <PolicyCardFields />
+      <PolicyCardFields
+        discardPile={discardPile}
+        drawingPile={drawingPile}
+        nFascistsPlayed={nFascistsPlayed}
+        nLiberalsPlayed={nLiberalsPlayed}
+      />
       <FailedElectionCounter electionCounter={electionRound} />
       {players.map((player, id) => (
         <Fragment key={id}>
           {id === presidentialCandidate ? <President /> : <></>}
           {id === government?.chancellor ? <Chancellor /> : <></>}
           <Avatar player={player} />
-          <Voting playerId={id} onVote={(vote) => dispatch(voteAction(vote))} />
+          <Voting
+            playerId={id}
+            onVote={(vote) => dispatch(voteAction(vote))}
+            phase={phase}
+            playerVotes={playerVotes}
+          />
         </Fragment>
       ))}
       <ChancellorNomination
         onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
         nominationValidator={isValidNomination}
+        presidentialCandidate={presidentialCandidate}
+        phase={phase}
+        players={players}
+        government={government}
         avatarComponent={(player) => <Avatar player={player} />}
       />
       {phase === "electionEvaluation" ? (
         <ElectionEvaluation
           onElectionAccepted={() => dispatch(acceptElection())}
           onElectionDeclined={() => dispatch(declineElection())}
+          playerVotes={playerVotes}
+          players={players}
+          phase={phase}
         />
       ) : (
         <></>
@@ -54,6 +80,8 @@ export default function App(): ReactElement {
       <DiscardPolicy
         onDiscard={(index) => dispatch(discardPolicy(index))}
         onPlay={() => dispatch(playPolicy)}
+        phase={phase}
+        drawingPile={drawingPile}
       />
       {phase !== null ? (
         <></>

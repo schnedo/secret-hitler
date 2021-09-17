@@ -1,22 +1,22 @@
 import type { ReactElement } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../../store";
+import type Phase from "../../Phase";
 import type { PlayerId } from "../../player";
+import type PlayerVotes from "../../PlayerVotes";
 import type Vote from "../Vote";
 
 export interface VotingProps {
   playerId: PlayerId;
   onVote: (vote: Vote) => void;
+  phase: Phase | null;
+  playerVotes: PlayerVotes;
 }
 
 export default function Voting({
   playerId,
   onVote,
+  phase,
+  playerVotes,
 }: VotingProps): ReactElement {
-  const { phase, playerVotes } = useSelector(
-    (state: RootState) => state.gameState,
-  );
-
   if (phase !== "vote") {
     return <></>;
   }

@@ -1,8 +1,7 @@
 import type { ComponentType, ReactElement } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import type { ModalProps } from "../../../components/Modal";
-import type { RootState } from "../../../store";
+import type Phase from "../../Phase";
 import type { Player, PlayerId } from "../../player";
 import type Government from "../Government";
 
@@ -18,6 +17,10 @@ export interface ChancellorNominationProps {
     nomination: Government,
   ) => boolean;
   avatarComponent: (player: Player) => ReactElement;
+  phase: Phase | null;
+  players: Player[];
+  presidentialCandidate: number | null;
+  government: Government | null;
 }
 
 export default function createChancellorNomination(
@@ -27,11 +30,11 @@ export default function createChancellorNomination(
     onNomination,
     nominationValidator,
     avatarComponent,
+    phase,
+    players,
+    presidentialCandidate,
+    government,
   }: ChancellorNominationProps): ReactElement {
-    const { phase, players, presidentialCandidate, government } = useSelector(
-      (state: RootState) => state.gameState,
-    );
-
     const electablePlayers =
       presidentialCandidate === null
         ? []

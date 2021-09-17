@@ -1,11 +1,15 @@
 import type { ComponentType, ReactElement } from "react";
-import { useSelector } from "react-redux";
 import type { ModalProps } from "../../../components/Modal";
-import type { RootState } from "../../../store";
+import type PlayerVotes from "../../PlayerVotes";
+import type Phase from "../../Phase";
+import type { Player } from "../../player";
 
 export interface ElectionEvaluationProps {
   onElectionAccepted: () => void;
   onElectionDeclined: () => void;
+  phase: Phase;
+  playerVotes: PlayerVotes;
+  players: Player[];
 }
 
 export default function createElectionEvaluation(
@@ -14,11 +18,10 @@ export default function createElectionEvaluation(
   return function ElectionEvaluation({
     onElectionAccepted,
     onElectionDeclined,
+    phase,
+    playerVotes,
+    players,
   }: ElectionEvaluationProps): ReactElement {
-    const { phase, playerVotes, players } = useSelector(
-      (state: RootState) => state.gameState,
-    );
-
     if (phase !== "electionEvaluation") {
       return <></>;
     }
