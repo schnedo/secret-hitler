@@ -1,6 +1,6 @@
 import type { ReactElement } from "react";
 import type { PlayerId } from "../../player";
-import type { PlayerVotes } from "../index";
+import type PlayerVotes from "../PlayerVotes";
 import type Vote from "../Vote";
 
 export interface VotingProps {

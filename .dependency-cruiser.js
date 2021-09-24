@@ -2,11 +2,28 @@
 module.exports = {
   forbidden: [
     {
+      name: "components-only-same-package-or-index",
+      severity: "error",
+      from: {
+        path: "^(.*)/components/[^/]+\\.(j|t)sx$"
+      },
+      to: {
+        pathNot: [
+          '^$1/[^/]+', // in parent directory of components folder
+          "index\\.(ts|tsx|js|jsx)$",
+          '^node_modules',
+        ]
+      }
+    },
+    {
       name: "only-same-package-or-index",
       severity: "error",
       from: {
         path: "^(.*)/[^/]+$",
-        pathNot: "\\.d\\.ts$", // TypeScript declaration files
+        pathNot: [
+          "\\.d\\.ts$", // TypeScript declaration files
+          "components/[^/]+\\.(j|t)sx$", // components see rule conponents-only-same-package-or-index
+        ]
       },
       to: {
         pathNot: [
