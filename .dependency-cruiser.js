@@ -9,7 +9,8 @@ module.exports = {
       },
       to: {
         pathNot: [
-          '^$1/[^/]+', // in parent directory of components folder
+          '^$1/[^/]+$', // in parent directory of components module
+          '^$1/components/[^/]+$', // in components module
           "index\\.(ts|tsx|js|jsx)$",
           '^node_modules',
         ]
