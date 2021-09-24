@@ -1,6 +1,6 @@
 import type { ComponentType, ReactElement } from "react";
 import styled from "styled-components";
-import type { ModalProps } from "../../../components/Modal";
+import type { ModalProps } from "../../../components";
 import type Phase from "../../Phase";
 import type { Player, PlayerId } from "../../player";
 import type Government from "../Government";

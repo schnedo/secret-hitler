@@ -1,5 +1,5 @@
 import type { ComponentType, ReactElement } from "react";
-import type { ModalProps } from "../../../components/Modal";
+import type { ModalProps } from "../../../components";
 import type Phase from "../../Phase";
 import type PolicyDeck from "../PolicyDeck";
 
