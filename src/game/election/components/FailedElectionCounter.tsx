@@ -1,5 +1,5 @@
 import type { ReactElement } from "react";
-import type { ElectionRound } from "..";
+import type ElectionRound from "../ElectionRound";
 
 export interface FailedElectionCounterProps {
   electionCounter: ElectionRound;

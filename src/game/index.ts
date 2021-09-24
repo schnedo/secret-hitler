@@ -26,12 +26,13 @@ export {
 export type { ElectionRound, Government, VotingProps } from "./election";
 export {
   discardPolicy,
-  DiscardPolicy,
+  PolicyDiscard,
   playPolicy,
   PolicyCardFields,
   policyDeckReducer,
 } from "./legislation";
 export type { Policy } from "./legislation";
+export type { default as Phase } from "./Phase";
 export { Avatar } from "./player";
 export type { Player } from "./player";
 

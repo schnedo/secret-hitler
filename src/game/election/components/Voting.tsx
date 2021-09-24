@@ -1,26 +1,19 @@
 import type { ReactElement } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../../store";
 import type { PlayerId } from "../../player";
+import type PlayerVotes from "../PlayerVotes";
 import type Vote from "../Vote";
 
 export interface VotingProps {
   playerId: PlayerId;
   onVote: (vote: Vote) => void;
+  playerVotes: PlayerVotes;
 }
 
 export default function Voting({
   playerId,
   onVote,
+  playerVotes,
 }: VotingProps): ReactElement {
-  const { phase, playerVotes } = useSelector(
-    (state: RootState) => state.gameState,
-  );
-
-  if (phase !== "vote") {
-    return <></>;
-  }
-
   if (playerVotes[playerId] !== undefined) {
     return <div>{playerVotes[playerId] ? "Yes" : "No"}</div>;
   }
