@@ -2,6 +2,7 @@ import type { ComponentType, ReactElement } from "react";
 import styled from "styled-components";
 import type { ModalProps } from "../../../components";
 import type { Player, PlayerId } from "../../player";
+import type { AvatarProps } from "../../player/Avatar";
 import type Government from "../Government";
 
 const NominationRow = styled.div`
@@ -15,7 +16,6 @@ export interface ChancellorNominationProps {
     lastGovernment: Government | null,
     nomination: Government,
   ) => boolean;
-  avatarComponent: (player: Player) => ReactElement;
   players: Player[];
   presidentialCandidate: number | null;
   government: Government | null;
@@ -23,11 +23,11 @@ export interface ChancellorNominationProps {
 
 export default function createChancellorNomination(
   Modal: ComponentType<ModalProps>,
+  Avatar: ComponentType<AvatarProps>,
 ) {
   return function ChancellorNomination({
     onNomination,
     nominationValidator,
-    avatarComponent,
     players,
     presidentialCandidate,
     government,
@@ -54,7 +54,7 @@ export default function createChancellorNomination(
             >
               Nominate
             </button>
-            {avatarComponent(player)}
+            <Avatar player={player} />
           </NominationRow>
         ))}
       </Modal>
