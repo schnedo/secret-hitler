@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div>
+  <div>
+    {"withBackdrop":true,"open":true}
+     
+    <div>
+      Secret Hitler is a game developed by Goat, Wolf, & Cabbage, licensed under the
+       
+      <a
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en"
+      >
+        CC BY-NC-SA 4.0
+      </a>
+    </div>
+  </div>
+</div>
+`;

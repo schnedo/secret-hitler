@@ -1,6 +1,6 @@
 import Button from "./Button";
 import createFooter from "./createFooter";
-import createLicense from "./License";
+import createLicense from "./createLicense";
 import Modal from "./Modal";
 
 export { default as Button } from "./Button";
