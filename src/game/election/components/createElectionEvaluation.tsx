@@ -1,7 +1,6 @@
 import type { ComponentType, ReactElement } from "react";
+import type { PlayerVotes, Phase } from "../..";
 import type { ModalProps } from "../../../components";
-import type PlayerVotes from "../../PlayerVotes";
-import type Phase from "../../Phase";
 import type { Player } from "../../player";
 
 export interface ElectionEvaluationProps {

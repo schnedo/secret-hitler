@@ -1,6 +1,6 @@
 import type { ComponentType, ReactElement } from "react";
 import type { ModalProps } from "../../../components";
-import type Phase from "../../Phase";
+import type { Phase } from "../..";
 import type PolicyDeck from "../PolicyDeck";
 
 export interface DiscardPolicyProps {
