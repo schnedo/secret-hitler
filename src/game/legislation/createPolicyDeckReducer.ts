@@ -6,7 +6,7 @@ import {
 import type PolicyDeck from "./PolicyDeck";
 import type { PolicyDeckShuffler } from "./PolicyDeckShuffler";
 
-export interface PolicyDeckReducer {
+export interface PolicyDeckState {
   drawingPile: PolicyDeck;
   discardPile: PolicyDeck;
   nLiberalsPlayed: number;
@@ -17,9 +17,7 @@ export interface PolicyDeckCreator {
   (): PolicyDeck;
 }
 
-function getInitialState(
-  createPolicyDeck: PolicyDeckCreator,
-): PolicyDeckReducer {
+function getInitialState(createPolicyDeck: PolicyDeckCreator): PolicyDeckState {
   return {
     drawingPile: createPolicyDeck(),
     discardPile: [],

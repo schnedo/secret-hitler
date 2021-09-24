@@ -1,6 +1,6 @@
 import { Modal } from "../../../components";
-import createDiscardPolicy from "./createDiscardPolicy";
+import createPolicyDiscard from "./createPolicyDiscard";
 
 export { default as PolicyCardFields } from "./PolicyCardFields";
 
-export const DiscardPolicy = createDiscardPolicy(Modal);
+export const PolicyDiscard = createPolicyDiscard(Modal);

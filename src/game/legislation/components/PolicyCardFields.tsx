@@ -1,15 +1,25 @@
 import type { ReactElement } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../../../store";
+import type PolicyDeck from "../PolicyDeck";
 
-export default function PolicyCardFields(): ReactElement {
-  const policyDeck = useSelector((state: RootState) => state.policyDeck);
+export interface PolicyCardFieldsProps {
+  drawingPile: PolicyDeck;
+  discardPile: PolicyDeck;
+  nLiberalsPlayed: number;
+  nFascistsPlayed: number;
+}
+
+export default function PolicyCardFields({
+  drawingPile,
+  discardPile,
+  nLiberalsPlayed,
+  nFascistsPlayed,
+}: PolicyCardFieldsProps): ReactElement {
   return (
     <div>
-      <div>size draw pile: {policyDeck.drawingPile.length}</div>
-      <div>size discard pile: {policyDeck.discardPile.length}</div>
-      <div>liberal policies enacted: {policyDeck.nLiberalsPlayed}</div>
-      <div>fascist policies enacted: {policyDeck.nFascistsPlayed}</div>
+      <div>size draw pile: {drawingPile.length}</div>
+      <div>size discard pile: {discardPile.length}</div>
+      <div>liberal policies enacted: {nLiberalsPlayed}</div>
+      <div>fascist policies enacted: {nFascistsPlayed}</div>
     </div>
   );
 }

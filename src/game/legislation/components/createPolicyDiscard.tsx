@@ -1,35 +1,21 @@
 import type { ComponentType, ReactElement } from "react";
-import { useSelector } from "react-redux";
-import type { ModalProps } from "../../../components/Modal";
-import type { RootState } from "../../../store";
+import type { ModalProps } from "../../../components";
+import type PolicyDeck from "../PolicyDeck";
 
 export interface DiscardPolicyProps {
   onDiscard: (index: number) => void;
   onPlay: () => void;
+  isChancellorDiscard?: boolean;
+  drawingPile: PolicyDeck;
 }
 
-export default function createDiscardPolicy(Modal: ComponentType<ModalProps>) {
+export default function createPolicyDiscard(Modal: ComponentType<ModalProps>) {
   return function DiscardPolicy({
     onDiscard,
     onPlay,
+    isChancellorDiscard,
+    drawingPile,
   }: DiscardPolicyProps): ReactElement {
-    const {
-      gameState: { phase },
-      policyDeck: { drawingPile },
-    } = useSelector(({ gameState, policyDeck }: RootState) => ({
-      gameState,
-      policyDeck,
-    }));
-
-    if (
-      phase !== "presidentSelectsPolicies" &&
-      phase !== "chancellorSelectsPolicies"
-    ) {
-      return <></>;
-    }
-
-    const isChancellorDiscard = phase === "chancellorSelectsPolicies";
-
     const nCardsToDraw = isChancellorDiscard ? 2 : 3;
     const handleClick = (index: number) => {
       onDiscard(index);

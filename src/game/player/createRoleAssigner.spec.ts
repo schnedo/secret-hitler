@@ -1,4 +1,4 @@
-import type { Player } from "../index";
+import type Player from "./Player";
 import createRoleAssigner, { RolesBagCreator } from "./createRoleAssigner";
 import { getUnshuffledRolesBag, RolesBag } from "./createRolesBagCreator";
 
