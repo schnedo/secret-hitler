@@ -60,6 +60,7 @@ module.exports = {
           "\\.(spec|test)\\.(js|ts|jsx|tsx)$", // test files
           "\\.d\\.ts$", // TypeScript declaration files
           "src/setupTests.ts", // test setup
+          "src/testUtils.ts", // test utils
         ],
         reachable: false,
       },

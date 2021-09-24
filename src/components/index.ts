@@ -1,5 +1,5 @@
 import Button from "./Button";
-import createFooter from "./Footer";
+import createFooter from "./createFooter";
 import createLicense from "./License";
 import Modal from "./Modal";
 
