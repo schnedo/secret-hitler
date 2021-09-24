@@ -7,11 +7,12 @@ import {
   ChancellorNomination,
   declineElection,
   discardPolicy,
-  DiscardPolicy,
+  PolicyDiscard,
   ElectionEvaluation,
   FailedElectionCounter,
   isValidNomination,
   nominateChancellor,
+  Phase,
   playPolicy,
   PolicyCardFields,
   startGame,
@@ -34,6 +35,45 @@ export default function App(): ReactElement {
   } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
 
+  const phaseComponentMap: Record<Phase, ReactElement> = {
+    nominate: (
+      <ChancellorNomination
+        onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
+        nominationValidator={isValidNomination}
+        presidentialCandidate={presidentialCandidate}
+        players={players}
+        government={government}
+        avatarComponent={(player) => <Avatar player={player} />}
+      />
+    ),
+    electionEvaluation: (
+      <ElectionEvaluation
+        onElectionAccepted={() => dispatch(acceptElection())}
+        onElectionDeclined={() => dispatch(declineElection())}
+        playerVotes={playerVotes}
+        players={players}
+      />
+    ),
+    presidentSelectsPolicies: (
+      <PolicyDiscard
+        onDiscard={(index) => dispatch(discardPolicy(index))}
+        onPlay={() => dispatch(playPolicy)}
+        isChancellorDiscard={phase === "chancellorSelectsPolicies"}
+        drawingPile={drawingPile}
+      />
+    ),
+    chancellorSelectsPolicies: (
+      <PolicyDiscard
+        onDiscard={(index) => dispatch(discardPolicy(index))}
+        onPlay={() => dispatch(playPolicy)}
+        isChancellorDiscard={phase === "chancellorSelectsPolicies"}
+        drawingPile={drawingPile}
+      />
+    ),
+    executiveAction: <></>,
+    vote: <></>,
+  };
+
   return (
     <>
       <div>{phase}</div>
@@ -49,42 +89,19 @@ export default function App(): ReactElement {
           {id === presidentialCandidate ? <President /> : <></>}
           {id === government?.chancellor ? <Chancellor /> : <></>}
           <Avatar player={player} />
-          <Voting
-            playerId={id}
-            onVote={(vote) => dispatch(voteAction(vote))}
-            phase={phase}
-            playerVotes={playerVotes}
-          />
+          {phase === "vote" ? (
+            <Voting
+              playerId={id}
+              onVote={(vote) => dispatch(voteAction(vote))}
+              playerVotes={playerVotes}
+            />
+          ) : (
+            <></>
+          )}
         </Fragment>
       ))}
-      <ChancellorNomination
-        onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
-        nominationValidator={isValidNomination}
-        presidentialCandidate={presidentialCandidate}
-        phase={phase}
-        players={players}
-        government={government}
-        avatarComponent={(player) => <Avatar player={player} />}
-      />
-      {phase === "electionEvaluation" ? (
-        <ElectionEvaluation
-          onElectionAccepted={() => dispatch(acceptElection())}
-          onElectionDeclined={() => dispatch(declineElection())}
-          playerVotes={playerVotes}
-          players={players}
-          phase={phase}
-        />
-      ) : (
-        <></>
-      )}
-      <DiscardPolicy
-        onDiscard={(index) => dispatch(discardPolicy(index))}
-        onPlay={() => dispatch(playPolicy)}
-        phase={phase}
-        drawingPile={drawingPile}
-      />
-      {phase !== null ? (
-        <></>
+      {phase ? (
+        phaseComponentMap[phase]
       ) : (
         <Button onClick={() => dispatch(startGame())}>Start</Button>
       )}

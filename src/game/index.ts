@@ -26,7 +26,7 @@ export {
 export type { ElectionRound, Government, VotingProps } from "./election";
 export {
   discardPolicy,
-  DiscardPolicy,
+  PolicyDiscard,
   playPolicy,
   PolicyCardFields,
   policyDeckReducer,

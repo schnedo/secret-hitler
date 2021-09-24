@@ -1,31 +1,21 @@
 import type { ComponentType, ReactElement } from "react";
 import type { ModalProps } from "../../../components";
-import type { Phase } from "../..";
 import type PolicyDeck from "../PolicyDeck";
 
 export interface DiscardPolicyProps {
   onDiscard: (index: number) => void;
   onPlay: () => void;
-  phase: Phase | null;
+  isChancellorDiscard?: boolean;
   drawingPile: PolicyDeck;
 }
 
-export default function createDiscardPolicy(Modal: ComponentType<ModalProps>) {
+export default function createPolicyDiscard(Modal: ComponentType<ModalProps>) {
   return function DiscardPolicy({
     onDiscard,
     onPlay,
-    phase,
+    isChancellorDiscard,
     drawingPile,
   }: DiscardPolicyProps): ReactElement {
-    if (
-      phase !== "presidentSelectsPolicies" &&
-      phase !== "chancellorSelectsPolicies"
-    ) {
-      return <></>;
-    }
-
-    const isChancellorDiscard = phase === "chancellorSelectsPolicies";
-
     const nCardsToDraw = isChancellorDiscard ? 2 : 3;
     const handleClick = (index: number) => {
       onDiscard(index);

@@ -1,5 +1,4 @@
 import type { ComponentType, ReactElement } from "react";
-import type { Phase } from "../..";
 import type { ModalProps } from "../../../components";
 import type { Player } from "../../player";
 import type { PlayerVotes } from "../index";
@@ -7,7 +6,6 @@ import type { PlayerVotes } from "../index";
 export interface ElectionEvaluationProps {
   onElectionAccepted: () => void;
   onElectionDeclined: () => void;
-  phase: Phase;
   playerVotes: PlayerVotes;
   players: Player[];
 }
@@ -18,13 +16,9 @@ export default function createElectionEvaluation(
   return function ElectionEvaluation({
     onElectionAccepted,
     onElectionDeclined,
-    phase,
     playerVotes,
     players,
   }: ElectionEvaluationProps): ReactElement {
-    if (phase !== "electionEvaluation") {
-      return <></>;
-    }
     const electionAccepted =
       Object.values(playerVotes).filter(Boolean).length > players.length / 2;
     const continueAction = electionAccepted

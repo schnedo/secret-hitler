@@ -1,7 +1,6 @@
 import type { ComponentType, ReactElement } from "react";
 import styled from "styled-components";
 import type { ModalProps } from "../../../components";
-import type { Phase } from "../../index";
 import type { Player, PlayerId } from "../../player";
 import type Government from "../Government";
 
@@ -17,7 +16,6 @@ export interface ChancellorNominationProps {
     nomination: Government,
   ) => boolean;
   avatarComponent: (player: Player) => ReactElement;
-  phase: Phase | null;
   players: Player[];
   presidentialCandidate: number | null;
   government: Government | null;
@@ -30,7 +28,6 @@ export default function createChancellorNomination(
     onNomination,
     nominationValidator,
     avatarComponent,
-    phase,
     players,
     presidentialCandidate,
     government,
@@ -46,7 +43,7 @@ export default function createChancellorNomination(
           );
 
     return (
-      <Modal open={phase === "nominate"}>
+      <Modal open>
         <div>Please nominate your chancellor candidate.</div>
         {electablePlayers.map((player) => (
           <NominationRow>
