@@ -3,10 +3,9 @@ import {
   ActionCreatorWithPayload,
   createReducer,
 } from "@reduxjs/toolkit";
-import type { ElectionRound, Government, Vote } from "./election";
+import type { ElectionRound, Government, Vote, PlayerVotes } from "./election";
 import type Phase from "./Phase";
 import type { Player, PlayerId } from "./player";
-import type PlayerVotes from "./PlayerVotes";
 
 export interface GameState {
   phase: Phase | null;

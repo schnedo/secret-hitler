@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import type { Phase } from "../..";
-import type { PlayerVotes } from "../../index";
 import type { PlayerId } from "../../player";
+import type { PlayerVotes } from "../index";
 import type Vote from "../Vote";
 
 export interface VotingProps {

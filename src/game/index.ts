@@ -33,7 +33,6 @@ export {
 } from "./legislation";
 export type { Policy } from "./legislation";
 export type { default as Phase } from "./Phase";
-export type { default as PlayerVotes } from "./PlayerVotes";
 export { Avatar } from "./player";
 export type { Player } from "./player";
 

@@ -1,7 +1,8 @@
 import type { ComponentType, ReactElement } from "react";
-import type { PlayerVotes, Phase } from "../..";
+import type { Phase } from "../..";
 import type { ModalProps } from "../../../components";
 import type { Player } from "../../player";
+import type { PlayerVotes } from "../index";
 
 export interface ElectionEvaluationProps {
   onElectionAccepted: () => void;
