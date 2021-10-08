@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/secret-hitler/static/css/main.4a4137e4.chunk.css",
-    "main.js": "/secret-hitler/static/js/main.47cb0608.chunk.js",
-    "main.js.map": "/secret-hitler/static/js/main.47cb0608.chunk.js.map",
+    "main.js": "/secret-hitler/static/js/main.8e4f6ebc.chunk.js",
+    "main.js.map": "/secret-hitler/static/js/main.8e4f6ebc.chunk.js.map",
     "runtime-main.js": "/secret-hitler/static/js/runtime-main.2a2ce132.js",
     "runtime-main.js.map": "/secret-hitler/static/js/runtime-main.2a2ce132.js.map",
     "static/js/2.55c90713.chunk.js": "/secret-hitler/static/js/2.55c90713.chunk.js",
@@ -40,6 +40,6 @@
     "static/js/runtime-main.2a2ce132.js",
     "static/js/2.55c90713.chunk.js",
     "static/css/main.4a4137e4.chunk.css",
-    "static/js/main.47cb0608.chunk.js"
+    "static/js/main.8e4f6ebc.chunk.js"
   ]
 }
