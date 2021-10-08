@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div>
+  <div>
+    {"open":true}
+     
+    <div>
+      Election 
+      
+       accepted
+    </div>
+    <div>
+      John
+      : 
+      Yes
+    </div>
+    <div>
+      Martha
+      : 
+      Yes
+    </div>
+    <div>
+      Bob
+      : 
+      Yes
+    </div>
+    <div>
+      Alice
+      : 
+      Yes
+    </div>
+    <div>
+      Mohammed
+      : 
+      Yes
+    </div>
+    <button>
+      continue
+    </button>
+  </div>
+</div>
+`;
