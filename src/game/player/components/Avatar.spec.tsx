@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
+import type Player from "../Player";
 import Avatar from "./Avatar";
-import type Player from "./Player";
 
 it("should render correctly", async () => {
   expect.hasAssertions();

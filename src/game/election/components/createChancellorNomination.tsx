@@ -2,7 +2,7 @@ import type { ComponentType, ReactElement } from "react";
 import styled from "styled-components";
 import type { ModalProps } from "../../../components";
 import type { Player, PlayerId } from "../../player";
-import type { AvatarProps } from "../../player/Avatar";
+import type { AvatarProps } from "../../player/components";
 import type Government from "../Government";
 
 const NominationRow = styled.div`
