@@ -6,5 +6,5 @@ export const assignRoles = createRoleAssigner(
   createRolesBagCreator(shuffleArray),
 );
 export type { default as Role } from "./Role";
-export { default as Avatar } from "./Avatar";
+export { Avatar } from "./components";
 export type { default as Player, PlayerId } from "./Player";

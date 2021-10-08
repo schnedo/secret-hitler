@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div>
+  <div>
+    <div>
+      size draw pile: 
+      0
+    </div>
+    <div>
+      size discard pile: 
+      0
+    </div>
+    <div>
+      liberal policies enacted: 
+      1
+    </div>
+    <div>
+      fascist policies enacted: 
+      3
+    </div>
+  </div>
+</div>
+`;

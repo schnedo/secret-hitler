@@ -7,7 +7,6 @@ import {
   ChancellorNomination,
   declineElection,
   discardPolicy,
-  PolicyDiscard,
   ElectionEvaluation,
   FailedElectionCounter,
   isValidNomination,
@@ -15,6 +14,7 @@ import {
   Phase,
   playPolicy,
   PolicyCardFields,
+  PolicyDiscard,
   startGame,
   vote as voteAction,
   Voting,
@@ -43,7 +43,6 @@ export default function App(): ReactElement {
         presidentialCandidate={presidentialCandidate}
         players={players}
         government={government}
-        avatarComponent={(player) => <Avatar player={player} />}
       />
     ),
     electionEvaluation: (
