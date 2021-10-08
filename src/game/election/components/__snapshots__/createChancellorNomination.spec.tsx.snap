@@ -19,10 +19,59 @@ exports[`should render correctly 1`] = `
       class="c0"
     >
       <button>
-        Nominate
+        Nominate 
+        John
       </button>
       <div>
-        {"player":{"name":"name","role":"liberal","title":null}}
+        {"player":{"name":"John","role":"fascist","title":null}}
+         
+      </div>
+    </div>
+    <div
+      class="c0"
+    >
+      <button>
+        Nominate 
+        Martha
+      </button>
+      <div>
+        {"player":{"name":"Martha","role":"hitler","title":null}}
+         
+      </div>
+    </div>
+    <div
+      class="c0"
+    >
+      <button>
+        Nominate 
+        Bob
+      </button>
+      <div>
+        {"player":{"name":"Bob","role":"liberal","title":null}}
+         
+      </div>
+    </div>
+    <div
+      class="c0"
+    >
+      <button>
+        Nominate 
+        Alice
+      </button>
+      <div>
+        {"player":{"name":"Alice","role":"liberal","title":null}}
+         
+      </div>
+    </div>
+    <div
+      class="c0"
+    >
+      <button>
+        Nominate 
+        Mohammed
+      </button>
+      <div>
+        {"player":{"name":"Mohammed","role":"liberal","title":null}}
          
       </div>
     </div>

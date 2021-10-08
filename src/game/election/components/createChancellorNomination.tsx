@@ -9,13 +9,17 @@ const NominationRow = styled.div`
   display: flex;
 `;
 
-export interface ChancellorNominationProps {
-  onNomination: (playerId: PlayerId) => void;
-  nominationValidator: (
+export interface NominationValidator {
+  (
     numPlayers: number,
     lastGovernment: Government | null,
     nomination: Government,
-  ) => boolean;
+  ): boolean;
+}
+
+export interface ChancellorNominationProps {
+  onNomination: (playerId: PlayerId) => void;
+  nominationValidator: NominationValidator;
   players: Player[];
   presidentialCandidate: number | null;
   government: Government | null;
@@ -52,7 +56,7 @@ export default function createChancellorNomination(
                 onNomination(players.findIndex((pl) => pl === player))
               }
             >
-              Nominate
+              Nominate {player.name}
             </button>
             <Avatar player={player} />
           </NominationRow>
