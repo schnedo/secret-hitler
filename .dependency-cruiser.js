@@ -5,7 +5,7 @@ module.exports = {
       name: "components-only-same-package-or-index",
       severity: "error",
       from: {
-        path: "^(.*)/components/[^/]+\\.(j|t)sx$"
+        path: "^(.*)/components/[^/]+\\.(j|t)sx$",
       },
       to: {
         pathNot: [
@@ -13,6 +13,7 @@ module.exports = {
           '^$1/components/[^/]+$', // in components module
           "index\\.(ts|tsx|js|jsx)$",
           '^node_modules',
+          "src/testUtils.ts", // test utils
         ]
       }
     },
@@ -23,7 +24,7 @@ module.exports = {
         path: "^(.*)/[^/]+$",
         pathNot: [
           "\\.d\\.ts$", // TypeScript declaration files
-          "components/[^/]+\\.(j|t)sx$", // components see rule conponents-only-same-package-or-index
+          "components/[^/]+\\.(j|t)sx$", // components see rule components-only-same-package-or-index
         ]
       },
       to: {
@@ -31,6 +32,7 @@ module.exports = {
           "^$1/[^/]+$", // same package
           "index\\.(ts|tsx|js|jsx)$",
           "^node_modules",
+          "^src/testUtils.ts", // test utils
         ],
       },
     },
@@ -59,10 +61,23 @@ module.exports = {
         pathNot: [
           "\\.(spec|test)\\.(js|ts|jsx|tsx)$", // test files
           "\\.d\\.ts$", // TypeScript declaration files
-          "src/setupTests.ts", // test setup
+          "^src/setupTests.ts", // test setup
+          "^src/testUtils.ts", // test utils
         ],
         reachable: false,
       },
+    },
+    {
+      name: "not-to-testUtils",
+      severity: 'error',
+      from: {
+        pathNot: [
+          "\\.(spec|test)\\.(js|ts|jsx|tsx)$", // test files
+        ]
+      },
+      to: {
+        path: '^src/testUtils.ts'
+      }
     },
     /* rules from the 'recommended' preset: */
     {

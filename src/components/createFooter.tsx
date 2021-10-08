@@ -1,6 +1,6 @@
 import { ComponentType, ReactElement, useState } from "react";
 import type { ButtonProps } from "./Button";
-import type { LicenseProps } from "./License";
+import type { LicenseProps } from "./createLicense";
 
 export default function createFooter(
   Button: ComponentType<ButtonProps>,

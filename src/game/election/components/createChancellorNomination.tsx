@@ -2,20 +2,24 @@ import type { ComponentType, ReactElement } from "react";
 import styled from "styled-components";
 import type { ModalProps } from "../../../components";
 import type { Player, PlayerId } from "../../player";
+import type { AvatarProps } from "../../player/components";
 import type Government from "../Government";
 
 const NominationRow = styled.div`
   display: flex;
 `;
 
-export interface ChancellorNominationProps {
-  onNomination: (playerId: PlayerId) => void;
-  nominationValidator: (
+export interface NominationValidator {
+  (
     numPlayers: number,
     lastGovernment: Government | null,
     nomination: Government,
-  ) => boolean;
-  avatarComponent: (player: Player) => ReactElement;
+  ): boolean;
+}
+
+export interface ChancellorNominationProps {
+  onNomination: (playerId: PlayerId) => void;
+  nominationValidator: NominationValidator;
   players: Player[];
   presidentialCandidate: number | null;
   government: Government | null;
@@ -23,11 +27,11 @@ export interface ChancellorNominationProps {
 
 export default function createChancellorNomination(
   Modal: ComponentType<ModalProps>,
+  Avatar: ComponentType<AvatarProps>,
 ) {
   return function ChancellorNomination({
     onNomination,
     nominationValidator,
-    avatarComponent,
     players,
     presidentialCandidate,
     government,
@@ -52,9 +56,9 @@ export default function createChancellorNomination(
                 onNomination(players.findIndex((pl) => pl === player))
               }
             >
-              Nominate
+              Nominate {player.name}
             </button>
-            {avatarComponent(player)}
+            <Avatar player={player} />
           </NominationRow>
         ))}
       </Modal>

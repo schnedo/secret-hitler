@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div>
+  <div>
+    {"open":true}
+     
+    <div>
+      select a policy to discard
+    </div>
+    <button>
+      fascist
+    </button>
+    <button>
+      liberal
+    </button>
+    <button>
+      fascist
+    </button>
+  </div>
+</div>
+`;
