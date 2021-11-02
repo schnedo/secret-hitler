@@ -69,7 +69,7 @@
     "lint-staged": "11.2.6",
     "prettier": "2.4.0",
     "react-scripts": "4.0.3",
-    "svgo": "2.5.0",
+    "svgo": "2.8.0",
     "typescript": "4.4.4"
   }
 }
