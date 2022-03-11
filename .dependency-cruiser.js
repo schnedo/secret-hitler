@@ -182,18 +182,6 @@ module.exports = {
         couldNotResolve: true,
       },
     },
-    {
-      name: "no-duplicate-dep-types",
-      comment:
-        "Likeley this module depends on an external ('npm') package that occurs more than once " +
-        "in your package.json i.e. bot as a devDependencies and in dependencies. This will cause " +
-        "maintenance problems later on.",
-      severity: "error",
-      from: {},
-      to: {
-        moreThanOneDependencyType: true,
-      },
-    },
 
     /* rules you might want to tweak for your specific situation: */
     {
