@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MockComponent } from "../../../testUtils";
 import type { Player } from "../../player";
@@ -61,7 +61,7 @@ it("should call onNomination with correct player id", async () => {
   expect.hasAssertions();
 
   const handleNomination = jest.fn();
-  const { getByRole } = render(
+  render(
     <ChancellorNomination
       onNomination={handleNomination}
       nominationValidator={() => true}
@@ -72,7 +72,7 @@ it("should call onNomination with correct player id", async () => {
   );
 
   somePlayers.forEach(({ name }, index) => {
-    userEvent.click(getByRole("button", { name: `Nominate ${name}` }));
+    userEvent.click(screen.getByRole("button", { name: `Nominate ${name}` }));
     expect(handleNomination).toHaveBeenLastCalledWith(index);
   });
 });
@@ -87,7 +87,7 @@ it("should only show players that are electable for nomination", async () => {
     .mockImplementation((numPlayers, lastGovernment, nomination) =>
       validPlayers.includes(nomination.chancellor),
     );
-  const { getAllByRole } = render(
+  render(
     <ChancellorNomination
       onNomination={handleNomination}
       nominationValidator={validateNomination}
@@ -97,7 +97,7 @@ it("should only show players that are electable for nomination", async () => {
     />,
   );
 
-  const allNominationButtons = getAllByRole("button");
+  const allNominationButtons = screen.getAllByRole("button");
   expect(allNominationButtons).toHaveLength(validPlayers.length);
   allNominationButtons.forEach((nominationButton, index) => {
     expect(nominationButton).toHaveTextContent(
@@ -109,7 +109,7 @@ it("should only show players that are electable for nomination", async () => {
 it("should not show presidentialCandidate as an option", async () => {
   expect.hasAssertions();
 
-  const { queryByRole } = render(
+  render(
     <ChancellorNomination
       onNomination={() => true}
       nominationValidator={() => true}
@@ -120,6 +120,8 @@ it("should not show presidentialCandidate as an option", async () => {
   );
 
   expect(
-    queryByRole("button", { name: somePlayers[presidentialCandidate].name }),
+    screen.queryByRole("button", {
+      name: somePlayers[presidentialCandidate].name,
+    }),
   ).not.toBeInTheDocument();
 });

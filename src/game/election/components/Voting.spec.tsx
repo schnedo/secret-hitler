@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type Vote from "../Vote";
 import Voting from "./Voting";
@@ -18,12 +18,10 @@ it("should call onVote with correct Vote", async () => {
 
   const playerId = 0;
   const handleVote = jest.fn();
-  const { getByRole } = render(
-    <Voting playerId={playerId} onVote={handleVote} playerVotes={[]} />,
-  );
+  render(<Voting playerId={playerId} onVote={handleVote} playerVotes={[]} />);
   expect(handleVote).not.toHaveBeenCalled();
 
-  userEvent.click(getByRole("button", { name: "Yes" }));
+  userEvent.click(screen.getByRole("button", { name: "Yes" }));
   expect(handleVote).toHaveBeenCalledTimes(1);
   let expectedVote: Vote = {
     playerId,
@@ -31,7 +29,7 @@ it("should call onVote with correct Vote", async () => {
   };
   expect(handleVote).toHaveBeenLastCalledWith(expectedVote);
 
-  userEvent.click(getByRole("button", { name: "No" }));
+  userEvent.click(screen.getByRole("button", { name: "No" }));
   expect(handleVote).toHaveBeenCalledTimes(2);
   expectedVote = {
     playerId,
@@ -44,15 +42,15 @@ it("should show the vote of the player if he has already voted", async () => {
   expect.hasAssertions();
 
   const playerId = 0;
-  const { queryByText, rerender } = render(
+  const { rerender } = render(
     <Voting
       playerId={playerId}
       onVote={() => undefined}
       playerVotes={[true]}
     />,
   );
-  expect(queryByText("Yes")).toBeInTheDocument();
-  expect(queryByText("No")).not.toBeInTheDocument();
+  expect(screen.getByText("Yes")).toBeInTheDocument();
+  expect(screen.queryByText("No")).not.toBeInTheDocument();
 
   rerender(
     <Voting
@@ -61,6 +59,6 @@ it("should show the vote of the player if he has already voted", async () => {
       playerVotes={[false]}
     />,
   );
-  expect(queryByText("Yes")).not.toBeInTheDocument();
-  expect(queryByText("No")).toBeInTheDocument();
+  expect(screen.queryByText("Yes")).not.toBeInTheDocument();
+  expect(screen.getByText("No")).toBeInTheDocument();
 });

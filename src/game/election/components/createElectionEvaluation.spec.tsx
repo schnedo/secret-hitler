@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MockComponent } from "../../../testUtils";
 import type { Player } from "../../player";
@@ -55,7 +55,7 @@ it("should call onElectionAccepted when election got accepted", async () => {
   expect.hasAssertions();
 
   const handleElectionAccepted = jest.fn();
-  const { getByRole } = render(
+  render(
     <ElectionEvaluation
       onElectionAccepted={handleElectionAccepted}
       onElectionDeclined={() => undefined}
@@ -65,7 +65,7 @@ it("should call onElectionAccepted when election got accepted", async () => {
   );
 
   expect(handleElectionAccepted).not.toHaveBeenCalled();
-  userEvent.click(getByRole("button"));
+  userEvent.click(screen.getByRole("button"));
   expect(handleElectionAccepted).toHaveBeenCalledTimes(1);
 });
 
@@ -74,7 +74,7 @@ it("should call onElectionDeclined when election got accepted", async () => {
 
   const allNoVotes = somePlayers.map(() => false);
   const handleElectionDeclined = jest.fn();
-  const { getByRole } = render(
+  render(
     <ElectionEvaluation
       onElectionAccepted={() => undefined}
       onElectionDeclined={handleElectionDeclined}
@@ -84,6 +84,6 @@ it("should call onElectionDeclined when election got accepted", async () => {
   );
 
   expect(handleElectionDeclined).not.toHaveBeenCalled();
-  userEvent.click(getByRole("button"));
+  userEvent.click(screen.getByRole("button"));
   expect(handleElectionDeclined).toHaveBeenCalledTimes(1);
 });

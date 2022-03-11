@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MockComponent } from "../../../testUtils";
 import type PolicyDeck from "../PolicyDeck";
@@ -25,7 +25,7 @@ it("should render correctly", async () => {
 it("should draw 3 cards for president discard", async () => {
   expect.hasAssertions();
 
-  const { getAllByRole } = render(
+  render(
     <PolicyDiscard
       onDiscard={() => undefined}
       onPlay={() => undefined}
@@ -33,7 +33,7 @@ it("should draw 3 cards for president discard", async () => {
     />,
   );
 
-  const allCards = getAllByRole("button");
+  const allCards = screen.getAllByRole("button");
   expect(allCards).toHaveLength(3);
   const cardTypes = allCards.map((card) => card.textContent);
   expect(cardTypes).toStrictEqual(drawingPile.slice(0, 3));
@@ -42,7 +42,7 @@ it("should draw 3 cards for president discard", async () => {
 it("should draw 2 cards for chancellor discard", async () => {
   expect.hasAssertions();
 
-  const { getAllByRole } = render(
+  render(
     <PolicyDiscard
       onDiscard={() => undefined}
       onPlay={() => undefined}
@@ -51,7 +51,7 @@ it("should draw 2 cards for chancellor discard", async () => {
     />,
   );
 
-  const allCards = getAllByRole("button");
+  const allCards = screen.getAllByRole("button");
   expect(allCards).toHaveLength(2);
   const cardTypes = allCards.map((card) => card.textContent);
   expect(cardTypes).toStrictEqual(drawingPile.slice(0, 2));
@@ -61,7 +61,7 @@ it("should call onDiscard when card is discarded", async () => {
   expect.hasAssertions();
 
   const handleDiscard = jest.fn();
-  const { getByRole } = render(
+  render(
     <PolicyDiscard
       onDiscard={handleDiscard}
       onPlay={() => undefined}
@@ -70,7 +70,7 @@ it("should call onDiscard when card is discarded", async () => {
   );
 
   expect(handleDiscard).not.toHaveBeenCalled();
-  userEvent.click(getByRole("button", { name: "liberal" }));
+  userEvent.click(screen.getByRole("button", { name: "liberal" }));
   expect(handleDiscard).toHaveBeenCalledTimes(1);
   expect(handleDiscard).toHaveBeenLastCalledWith(1);
 });
@@ -79,7 +79,7 @@ it("should call onPlay when card is discarded by chancellor", async () => {
   expect.hasAssertions();
 
   const handlePlay = jest.fn();
-  const { getAllByRole } = render(
+  render(
     <PolicyDiscard
       onDiscard={() => undefined}
       onPlay={handlePlay}
@@ -89,6 +89,6 @@ it("should call onPlay when card is discarded by chancellor", async () => {
   );
 
   expect(handlePlay).not.toHaveBeenCalled();
-  userEvent.click(getAllByRole("button").pop()!);
+  userEvent.click(screen.getAllByRole("button").pop()!);
   expect(handlePlay).toHaveBeenCalledTimes(1);
 });
