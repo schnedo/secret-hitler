@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Modal from "./Modal";
 
@@ -18,13 +18,13 @@ describe("Modal", () => {
   it("should render child when opened", async () => {
     expect.hasAssertions();
 
-    const { container, getByTestId } = render(
+    const { container } = render(
       <Modal open={true}>
         <div data-testid={"id"}>foo</div>
       </Modal>,
     );
 
-    expect(container).toContainElement(getByTestId("id"));
+    expect(container).toContainElement(screen.getByTestId("id"));
   });
 
   it("should call onClose when clicked on background", async () => {
@@ -32,13 +32,13 @@ describe("Modal", () => {
 
     const onClose = jest.fn();
 
-    const { container } = render(
+    render(
       <Modal open={true} onClose={onClose}>
         <div>foo</div>
       </Modal>,
     );
 
-    userEvent.click(container.firstElementChild!);
+    userEvent.click(screen.getByTestId("background"));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
@@ -47,20 +47,20 @@ describe("Modal", () => {
 
     const onClose = jest.fn();
 
-    const { getByTestId } = render(
+    render(
       <Modal open={true} onClose={onClose}>
         <div data-testid={"id"}>foo</div>
       </Modal>,
     );
 
-    userEvent.click(getByTestId("id"));
+    userEvent.click(screen.getByTestId("id"));
     expect(onClose).not.toHaveBeenCalled();
   });
 
   it("should have backdrop filter when set", async () => {
     expect.hasAssertions();
-    const { container } = render(<Modal withBackdrop open={true} />);
-    expect(container.firstChild).toHaveStyleRule(
+    render(<Modal withBackdrop open={true} />);
+    expect(screen.getByTestId("background")).toHaveStyleRule(
       "backdrop-filter",
       "brightness(40%)",
     );
@@ -68,7 +68,10 @@ describe("Modal", () => {
 
   it("should not have backdrop filter when not set", async () => {
     expect.hasAssertions();
-    const { container } = render(<Modal open={true} />);
-    expect(container.firstChild).toHaveStyleRule("backdrop-filter", undefined);
+    render(<Modal open={true} />);
+    expect(screen.getByTestId("background")).toHaveStyleRule(
+      "backdrop-filter",
+      undefined,
+    );
   });
 });
