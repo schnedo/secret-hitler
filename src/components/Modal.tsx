@@ -44,7 +44,11 @@ function Modal({
     return <></>;
   }
   return (
-    <Container withBackdrop={withBackdrop} onClick={closeContainer}>
+    <Container
+      data-testid={"background"}
+      withBackdrop={withBackdrop}
+      onClick={closeContainer}
+    >
       <Global />
       <dialog open={open}>{children}</dialog>
     </Container>
