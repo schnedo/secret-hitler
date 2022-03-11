@@ -1,20 +1,16 @@
-import {
-  ActionCreatorWithoutPayload,
-  ActionCreatorWithPayload,
-  createReducer,
-} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type PolicyDeck from "./PolicyDeck";
 import type { PolicyDeckShuffler } from "./PolicyDeckShuffler";
 
-export interface PolicyDeckState {
+interface PolicyDeckCreator {
+  (): PolicyDeck;
+}
+
+interface PolicyDeckState {
   drawingPile: PolicyDeck;
   discardPile: PolicyDeck;
   nLiberalsPlayed: number;
   nFascistsPlayed: number;
-}
-
-export interface PolicyDeckCreator {
-  (): PolicyDeck;
 }
 
 function getInitialState(createPolicyDeck: PolicyDeckCreator): PolicyDeckState {
@@ -25,26 +21,25 @@ function getInitialState(createPolicyDeck: PolicyDeckCreator): PolicyDeckState {
     nFascistsPlayed: 0,
   };
 }
-export interface CreatePolicyDeckReducerOptions {
+
+interface CreatePolicyDeckSliceOptions {
   shuffle: PolicyDeckShuffler;
   createPolicyDeck: PolicyDeckCreator;
-  discardPolicyActionCreator: ActionCreatorWithPayload<number>;
-  playPolicyActionCreator: ActionCreatorWithoutPayload;
 }
 
-export default function createPolicyDeckReducer({
+export default function createPolicyDeckSlice({
   shuffle,
   createPolicyDeck,
-  discardPolicyActionCreator,
-  playPolicyActionCreator,
-}: CreatePolicyDeckReducerOptions) {
-  return createReducer(getInitialState(createPolicyDeck), (builder) => {
-    builder
-      .addCase(discardPolicyActionCreator, (state, { payload }) => {
+}: CreatePolicyDeckSliceOptions) {
+  return createSlice({
+    name: "policydeck",
+    initialState: getInitialState(createPolicyDeck),
+    reducers: {
+      discardPolicy(state, { payload }: PayloadAction<number>) {
         state.discardPile.push(state.drawingPile[payload]);
         state.drawingPile.splice(payload, 1);
-      })
-      .addCase(playPolicyActionCreator, (state) => {
+      },
+      playPolicy(state) {
         const cardToPlay = state.drawingPile[0];
         if (cardToPlay === "liberal") {
           state.nLiberalsPlayed += 1;
@@ -59,6 +54,7 @@ export default function createPolicyDeckReducer({
           ]);
           state.discardPile = [];
         }
-      });
+      },
+    },
   });
 }

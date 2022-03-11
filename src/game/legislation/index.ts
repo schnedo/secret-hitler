@@ -1,15 +1,13 @@
 import { shuffleArray } from "../../utils";
-import { discardPolicy, playPolicy } from "./actions";
 import createPolicyDeckCreator from "./createPolicyDeckCreator";
-import createPolicyDeckReducer from "./createPolicyDeckReducer";
+import createPolicyDeckSlice from "./createPolicyDeckSlice";
 
-export * from "./actions";
 export * from "./components";
 export type { default as Policy } from "./Policy";
 
-export const policyDeckReducer = createPolicyDeckReducer({
+const policyDeckReducer = createPolicyDeckSlice({
   shuffle: shuffleArray,
   createPolicyDeck: createPolicyDeckCreator(shuffleArray),
-  discardPolicyActionCreator: discardPolicy,
-  playPolicyActionCreator: playPolicy,
 });
+export const policyDeck = policyDeckReducer.reducer;
+export const { playPolicy, discardPolicy } = policyDeckReducer.actions;

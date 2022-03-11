@@ -28,7 +28,7 @@ export {
   PolicyDiscard,
   playPolicy,
   PolicyCardFields,
-  policyDeckReducer,
+  policyDeck,
 } from "./legislation";
 export type { Policy } from "./legislation";
 export type { default as Phase } from "./Phase";
