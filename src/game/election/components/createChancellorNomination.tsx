@@ -5,7 +5,7 @@ import type { ModalProps } from "../../../components";
 import type { RootState } from "../../../store";
 import type { Player, PlayerId } from "../../player";
 import type { AvatarProps } from "../../player/components";
-import { nominateChancellor } from "../actions";
+import { nominateChancellor } from "../";
 import type Government from "../Government";
 
 const NominationRow = styled.div`
