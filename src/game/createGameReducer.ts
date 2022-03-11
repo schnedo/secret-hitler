@@ -9,7 +9,6 @@ import type { Player, PlayerId } from "./player";
 
 export interface GameState {
   phase: Phase | null;
-  players: Player[];
   government: Government | null;
   nominatedGovernment: Government | null;
   presidentialCandidate: PlayerId | null;
@@ -17,16 +16,9 @@ export interface GameState {
   electionRound: ElectionRound;
 }
 
-const playerNames = ["John", "Martha", "Bob", "Alice", "Mohammed"];
-
 function getInitialState(): GameState {
   return {
     phase: null,
-    players: playerNames.map((name) => ({
-      name,
-      role: null,
-      title: null,
-    })),
     government: null,
     nominatedGovernment: null,
     presidentialCandidate: null,
@@ -59,7 +51,6 @@ export interface CreateGameReducerOptions {
   nextPresidentialCandidate: NextPresidentialCandidateSelector;
   nominateChancellor: ActionCreatorWithPayload<number>;
   vote: ActionCreatorWithPayload<Vote>;
-  assignRoles: RolesAssigner;
   discardPolicy: ActionCreatorWithPayload<number>;
   playPolicy: ActionCreatorWithoutPayload;
 }
@@ -72,7 +63,6 @@ export default function createGameReducer({
   vote,
   acceptElection,
   declineElection,
-  assignRoles,
   discardPolicy,
   playPolicy,
 }: CreateGameReducerOptions) {
@@ -80,11 +70,11 @@ export default function createGameReducer({
     builder
       .addCase(startGame, (state) => {
         state.phase = "nominate";
-        state.players = assignRoles(state.players);
-        state.presidentialCandidate = nextPresidentialCandidate(
-          state.presidentialCandidate,
-          state.players,
-        );
+        // Fixme: move into election feature slice
+        // state.presidentialCandidate = nextPresidentialCandidate(
+        //   state.presidentialCandidate,
+        //   state.players,
+        // );
       })
       .addCase(nominateChancellor, (state, { payload: nominatedPlayer }) => {
         if (state.presidentialCandidate === null) {
@@ -93,29 +83,31 @@ export default function createGameReducer({
             `cannot nominate chancellor without presidential candidate`,
           );
         }
-        if (
-          isValidNomination(state.players.length, state.government, {
-            chancellor: nominatedPlayer,
-            president: state.presidentialCandidate,
-          })
-        ) {
-          state.nominatedGovernment = {
-            president: state.presidentialCandidate,
-            chancellor: nominatedPlayer,
-          };
-          state.phase = "vote";
-        } else {
-          throw Error(`Election of ${nominatedPlayer} is not valid`);
-        }
+        // Fixme: move into feature slice
+        // if (
+        //   isValidNomination(state.players.length, state.government, {
+        //     chancellor: nominatedPlayer,
+        //     president: state.presidentialCandidate,
+        //   })
+        // ) {
+        //   state.nominatedGovernment = {
+        //     president: state.presidentialCandidate,
+        //     chancellor: nominatedPlayer,
+        //   };
+        //   state.phase = "vote";
+        // } else {
+        //   throw Error(`Election of ${nominatedPlayer} is not valid`);
+        // }
       })
       .addCase(vote, (state, { payload: { agreed, playerId } }) => {
         if (state.playerVotes[playerId]) {
           throw Error(`player ${playerId} already voted`);
         }
         state.playerVotes[playerId] = agreed;
-        if (Object.keys(state.playerVotes).length === state.players.length) {
-          state.phase = "electionEvaluation";
-        }
+        // Fixme: move into feature slice
+        // if (Object.keys(state.playerVotes).length === state.players.length) {
+        //   state.phase = "electionEvaluation";
+        // }
       })
       .addCase(acceptElection, (state) => {
         state.electionRound = 0;
@@ -138,10 +130,11 @@ export default function createGameReducer({
         state.electionRound += 1;
         state.playerVotes = {};
         state.nominatedGovernment = null;
-        state.presidentialCandidate = nextPresidentialCandidate(
-          state.presidentialCandidate,
-          state.players,
-        );
+        // fixme: move into feature slice
+        // state.presidentialCandidate = nextPresidentialCandidate(
+        //   state.presidentialCandidate,
+        //   state.players,
+        // );
         state.phase = "nominate";
       })
       .addCase(discardPolicy, (state) => {

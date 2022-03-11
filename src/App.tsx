@@ -22,8 +22,8 @@ import type { RootState } from "./store";
 
 export default function App(): ReactElement {
   const {
+    players: playersState,
     gameState: {
-      players,
       playerVotes,
       phase,
       presidentialCandidate,
@@ -33,6 +33,7 @@ export default function App(): ReactElement {
     policyDeck: { drawingPile, discardPile, nFascistsPlayed, nLiberalsPlayed },
   } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
+  const players = Object.values(playersState);
 
   const phaseComponentMap: Record<Phase, ReactElement> = {
     nominate: (

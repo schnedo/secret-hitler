@@ -12,8 +12,8 @@ const NominationRow = styled.div`
   display: flex;
 `;
 
-const mapState = ({ gameState: { players } }: RootState) => ({
-  players,
+const mapState = ({ players }: RootState) => ({
+  players: Object.values(players),
 });
 
 const mapDispatch = {

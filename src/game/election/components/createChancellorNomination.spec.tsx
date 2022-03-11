@@ -13,26 +13,31 @@ const ChancellorNomination = createChancellorNomination(
 );
 const somePlayers: Player[] = [
   {
+    id: 0,
     name: "John",
     role: "fascist",
     title: null,
   },
   {
+    id: 1,
     name: "Martha",
     role: "hitler",
     title: null,
   },
   {
+    id: 2,
     name: "Bob",
     role: "liberal",
     title: null,
   },
   {
+    id: 3,
     name: "Alice",
     role: "liberal",
     title: null,
   },
   {
+    id: 4,
     name: "Mohammed",
     role: "liberal",
     title: null,

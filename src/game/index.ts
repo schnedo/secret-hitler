@@ -9,7 +9,6 @@ import {
   vote,
 } from "./election";
 import { discardPolicy, playPolicy } from "./legislation";
-import { assignRoles } from "./player";
 
 export * from "./actions";
 export {
@@ -33,7 +32,7 @@ export {
 } from "./legislation";
 export type { Policy } from "./legislation";
 export type { default as Phase } from "./Phase";
-export { Avatar } from "./player";
+export { Avatar, players } from "./player";
 export type { Player } from "./player";
 
 export const gameReducer = createGameReducer({
@@ -44,7 +43,6 @@ export const gameReducer = createGameReducer({
   vote,
   acceptElection,
   declineElection,
-  assignRoles,
   discardPolicy,
   playPolicy,
 });
