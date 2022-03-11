@@ -10,7 +10,6 @@ import {
   ElectionEvaluation,
   FailedElectionCounter,
   isValidNomination,
-  nominateChancellor,
   Phase,
   playPolicy,
   PolicyCardFields,
@@ -38,10 +37,8 @@ export default function App(): ReactElement {
   const phaseComponentMap: Record<Phase, ReactElement> = {
     nominate: (
       <ChancellorNomination
-        onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
         nominationValidator={isValidNomination}
         presidentialCandidate={presidentialCandidate}
-        players={players}
         government={government}
       />
     ),
