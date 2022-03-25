@@ -16,7 +16,8 @@ const names = [
 ];
 
 function createInitialState(nPlayers: number): Player[] {
-  return names.slice(0, nPlayers).map((name) => ({
+  return names.slice(0, nPlayers).map((name, id) => ({
+    id,
     name,
     role: null,
     title: null,

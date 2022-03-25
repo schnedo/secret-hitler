@@ -1,15 +1,5 @@
 import { startGame } from "./actions";
 import createGameReducer from "./createGameReducer";
-import {
-  acceptElection,
-  declineElection,
-  isValidNomination,
-  nextPresidentialCandidate,
-  nominateChancellor,
-  vote,
-} from "./election";
-import { discardPolicy, playPolicy } from "./legislation";
-import { assignRoles } from "./player";
 
 export * from "./actions";
 export {
@@ -29,22 +19,13 @@ export {
   PolicyDiscard,
   playPolicy,
   PolicyCardFields,
-  policyDeckReducer,
+  policyDeck,
 } from "./legislation";
 export type { Policy } from "./legislation";
 export type { default as Phase } from "./Phase";
-export { Avatar } from "./player";
+export { Avatar, players } from "./player";
 export type { Player } from "./player";
 
 export const gameReducer = createGameReducer({
   startGame,
-  nominateChancellor,
-  isValidNomination,
-  nextPresidentialCandidate,
-  vote,
-  acceptElection,
-  declineElection,
-  assignRoles,
-  discardPolicy,
-  playPolicy,
 });

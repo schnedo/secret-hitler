@@ -10,7 +10,6 @@ import {
   ElectionEvaluation,
   FailedElectionCounter,
   isValidNomination,
-  nominateChancellor,
   Phase,
   playPolicy,
   PolicyCardFields,
@@ -23,8 +22,8 @@ import type { RootState } from "./store";
 
 export default function App(): ReactElement {
   const {
+    players: playersState,
     gameState: {
-      players,
       playerVotes,
       phase,
       presidentialCandidate,
@@ -34,14 +33,13 @@ export default function App(): ReactElement {
     policyDeck: { drawingPile, discardPile, nFascistsPlayed, nLiberalsPlayed },
   } = useSelector((state: RootState) => state);
   const dispatch = useDispatch();
+  const players = Object.values(playersState);
 
   const phaseComponentMap: Record<Phase, ReactElement> = {
     nominate: (
       <ChancellorNomination
-        onNomination={(playerId) => dispatch(nominateChancellor(playerId))}
         nominationValidator={isValidNomination}
         presidentialCandidate={presidentialCandidate}
-        players={players}
         government={government}
       />
     ),

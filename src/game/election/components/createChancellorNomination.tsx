@@ -1,13 +1,26 @@
 import type { ComponentType, ReactElement } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import type { ModalProps } from "../../../components";
+import type { RootState } from "../../../store";
 import type { Player, PlayerId } from "../../player";
 import type { AvatarProps } from "../../player/components";
+import { nominateChancellor } from "../";
 import type Government from "../Government";
 
 const NominationRow = styled.div`
   display: flex;
 `;
+
+const mapState = ({ players }: RootState) => ({
+  players: Object.values(players),
+});
+
+const mapDispatch = {
+  onNomination: nominateChancellor,
+};
+
+export const connectNominationValidator = connect(mapState, mapDispatch);
 
 export interface NominationValidator {
   (
