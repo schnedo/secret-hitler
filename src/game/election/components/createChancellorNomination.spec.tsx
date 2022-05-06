@@ -9,6 +9,7 @@ import createChancellorNomination, {
 
 const ChancellorNomination = createChancellorNomination(
   MockComponent,
+  // @ts-expect-error probably some type inference issue. can be ignored here, as it is a mock component
   MockComponent,
 );
 const somePlayers: Player[] = [
