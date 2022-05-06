@@ -21,7 +21,7 @@ it("should call onVote with correct Vote", async () => {
   render(<Voting playerId={playerId} onVote={handleVote} playerVotes={[]} />);
   expect(handleVote).not.toHaveBeenCalled();
 
-  userEvent.click(screen.getByRole("button", { name: "Yes" }));
+  await userEvent.click(screen.getByRole("button", { name: "Yes" }));
   expect(handleVote).toHaveBeenCalledTimes(1);
   let expectedVote: Vote = {
     playerId,
@@ -29,7 +29,7 @@ it("should call onVote with correct Vote", async () => {
   };
   expect(handleVote).toHaveBeenLastCalledWith(expectedVote);
 
-  userEvent.click(screen.getByRole("button", { name: "No" }));
+  await userEvent.click(screen.getByRole("button", { name: "No" }));
   expect(handleVote).toHaveBeenCalledTimes(2);
   expectedVote = {
     playerId,
