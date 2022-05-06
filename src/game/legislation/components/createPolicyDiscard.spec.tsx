@@ -70,7 +70,7 @@ it("should call onDiscard when card is discarded", async () => {
   );
 
   expect(handleDiscard).not.toHaveBeenCalled();
-  userEvent.click(screen.getByRole("button", { name: "liberal" }));
+  await userEvent.click(screen.getByRole("button", { name: "liberal" }));
   expect(handleDiscard).toHaveBeenCalledTimes(1);
   expect(handleDiscard).toHaveBeenLastCalledWith(1);
 });
@@ -89,6 +89,6 @@ it("should call onPlay when card is discarded by chancellor", async () => {
   );
 
   expect(handlePlay).not.toHaveBeenCalled();
-  userEvent.click(screen.getAllByRole("button").pop()!);
+  await userEvent.click(screen.getAllByRole("button").pop()!);
   expect(handlePlay).toHaveBeenCalledTimes(1);
 });

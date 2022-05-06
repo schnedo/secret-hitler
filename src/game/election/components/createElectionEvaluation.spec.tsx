@@ -65,7 +65,7 @@ it("should call onElectionAccepted when election got accepted", async () => {
   );
 
   expect(handleElectionAccepted).not.toHaveBeenCalled();
-  userEvent.click(screen.getByRole("button"));
+  await userEvent.click(screen.getByRole("button"));
   expect(handleElectionAccepted).toHaveBeenCalledTimes(1);
 });
 
@@ -84,6 +84,6 @@ it("should call onElectionDeclined when election got accepted", async () => {
   );
 
   expect(handleElectionDeclined).not.toHaveBeenCalled();
-  userEvent.click(screen.getByRole("button"));
+  await userEvent.click(screen.getByRole("button"));
   expect(handleElectionDeclined).toHaveBeenCalledTimes(1);
 });

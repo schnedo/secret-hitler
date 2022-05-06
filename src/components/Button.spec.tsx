@@ -17,6 +17,6 @@ it("should call onClick when clicked", async () => {
   render(<Button onClick={onClick}>{"labelText"}</Button>);
 
   expect(onClick).not.toHaveBeenCalled();
-  userEvent.click(screen.getByRole("button"));
+  await userEvent.click(screen.getByRole("button"));
   expect(onClick).toHaveBeenCalledTimes(1);
 });
