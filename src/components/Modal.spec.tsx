@@ -38,7 +38,7 @@ describe("Modal", () => {
       </Modal>,
     );
 
-    userEvent.click(screen.getByTestId("background"));
+    await userEvent.click(screen.getByTestId("background"));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 
@@ -53,7 +53,7 @@ describe("Modal", () => {
       </Modal>,
     );
 
-    userEvent.click(screen.getByTestId("id"));
+    await userEvent.click(screen.getByTestId("id"));
     expect(onClose).not.toHaveBeenCalled();
   });
 

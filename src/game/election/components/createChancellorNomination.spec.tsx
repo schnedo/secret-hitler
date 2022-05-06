@@ -9,6 +9,7 @@ import createChancellorNomination, {
 
 const ChancellorNomination = createChancellorNomination(
   MockComponent,
+  // @ts-expect-error probably some type inference issue. can be ignored here, as it is a mock component
   MockComponent,
 );
 const somePlayers: Player[] = [
@@ -71,10 +72,14 @@ it("should call onNomination with correct player id", async () => {
     />,
   );
 
-  somePlayers.forEach(({ name }, index) => {
-    userEvent.click(screen.getByRole("button", { name: `Nominate ${name}` }));
-    expect(handleNomination).toHaveBeenLastCalledWith(index);
-  });
+  await Promise.all(
+    somePlayers.map(async ({ name }, index) => {
+      await userEvent.click(
+        screen.getByRole("button", { name: `Nominate ${name}` }),
+      );
+      expect(handleNomination).toHaveBeenLastCalledWith(index);
+    }),
+  );
 });
 
 it("should only show players that are electable for nomination", async () => {

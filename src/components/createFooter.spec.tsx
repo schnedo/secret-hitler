@@ -5,6 +5,7 @@ import createFooter from "./createFooter";
 it("should render correctly", async () => {
   expect.hasAssertions();
 
+  // @ts-expect-error probably some type inference issue. can be ignored here, as it is a mock component
   const Footer = createFooter(MockComponent, MockComponent);
   const { container } = render(<Footer />);
 

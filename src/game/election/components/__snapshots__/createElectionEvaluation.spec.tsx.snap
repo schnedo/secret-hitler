@@ -7,7 +7,6 @@ exports[`should render correctly 1`] = `
      
     <div>
       Election 
-      
        accepted
     </div>
     <div>
