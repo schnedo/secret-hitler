@@ -73,10 +73,13 @@ it("should call onNomination with correct player id", async () => {
   );
 
   await Promise.all(
-  somePlayers.map(async ({ name }, index) => {
-    await userEvent.click(screen.getByRole("button", { name: `Nominate ${name}` }));
-    expect(handleNomination).toHaveBeenLastCalledWith(index);
-  }));
+    somePlayers.map(async ({ name }, index) => {
+      await userEvent.click(
+        screen.getByRole("button", { name: `Nominate ${name}` }),
+      );
+      expect(handleNomination).toHaveBeenLastCalledWith(index);
+    }),
+  );
 });
 
 it("should only show players that are electable for nomination", async () => {
