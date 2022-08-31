@@ -34,7 +34,7 @@
     "@types/styled-components": "5.1.26",
     "dependency-cruiser": "11.15.0",
     "husky": "8.0.1",
-    "jest-styled-components": "7.1.0",
+    "jest-styled-components": "7.1.1",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
     "react-scripts": "5.0.1",
