@@ -35,7 +35,7 @@
     "dependency-cruiser": "12.0.1",
     "husky": "8.0.2",
     "jest-styled-components": "7.1.1",
-    "lint-staged": "13.0.3",
+    "lint-staged": "13.0.4",
     "prettier": "2.8.0",
     "react-scripts": "5.0.1",
     "svgo": "3.0.2",
