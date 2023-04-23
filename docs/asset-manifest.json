@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/secret-hitler/static/css/main.e6c13ad2.css",
-    "main.js": "/secret-hitler/static/js/main.c16b6f85.js",
+    "main.js": "/secret-hitler/static/js/main.7800d6c6.js",
     "static/js/496.9cdf1cb0.chunk.js": "/secret-hitler/static/js/496.9cdf1cb0.chunk.js",
     "static/media/presidentAndChancellor.svg": "/secret-hitler/static/media/presidentAndChancellor.07b718e3a6989c3190f99f3dc56eb941.svg",
     "static/media/fascistBoardFront78.svg": "/secret-hitler/static/media/fascistBoardFront78.218214a67acf4d5b6aa0cde70c900908.svg",
@@ -28,11 +28,11 @@
     "static/media/Fraktur32.svg": "/secret-hitler/static/media/Fraktur32.3173fe14e87ad69eeb54e7fc64147397.svg",
     "index.html": "/secret-hitler/index.html",
     "main.e6c13ad2.css.map": "/secret-hitler/static/css/main.e6c13ad2.css.map",
-    "main.c16b6f85.js.map": "/secret-hitler/static/js/main.c16b6f85.js.map",
+    "main.7800d6c6.js.map": "/secret-hitler/static/js/main.7800d6c6.js.map",
     "496.9cdf1cb0.chunk.js.map": "/secret-hitler/static/js/496.9cdf1cb0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.c16b6f85.js"
+    "static/js/main.7800d6c6.js"
   ]
 }
