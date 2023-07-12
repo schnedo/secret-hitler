@@ -30,7 +30,7 @@
     "@types/jest": "29.5.3",
     "@types/node": "16.18.38",
     "@types/react": "18.2.14",
-    "@types/react-dom": "18.2.6",
+    "@types/react-dom": "18.2.7",
     "@types/styled-components": "5.1.26",
     "dependency-cruiser": "13.1.0",
     "husky": "8.0.3",
