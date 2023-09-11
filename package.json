@@ -31,7 +31,7 @@
     "@types/node": "16.18.50",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "@types/styled-components": "5.1.26",
+    "@types/styled-components": "5.1.27",
     "dependency-cruiser": "13.1.5",
     "husky": "8.0.3",
     "jest-styled-components": "7.1.1",
